@@ -1,0 +1,34 @@
+SELECT book.name, book.release_date, publishing_company.name FROM "LIBRARY_APP".library.book
+JOIN "LIBRARY_APP".library.publishing_company
+ON book.company_id=publishing_company.id;
+
+
+SELECT name FROM "LIBRARY_APP".library.book_author b
+JOIN "LIBRARY_APP".library.author a on a.id = b.author_id
+where b.book_id = (SELECT id from "LIBRARY_APP".library.book u where u.name='451 градус по фрг');
+
+
+SELECT name FROM "LIBRARY_APP".library.book_genre b
+JOIN "LIBRARY_APP".library.genre a on a.id = b.genre_id
+where b.book_id = (SELECT id from "LIBRARY_APP".library.book u where u.name='451 градус по фрг');
+
+
+SELECT a.name, b.page FROM "LIBRARY_APP".library.book_mark b
+JOIN "LIBRARY_APP".library.book a on a.id = b.book_id
+where b.user_id = (SELECT id from "LIBRARY_APP".library."user" u where u.login='andrey');
+
+
+SELECT a.name, r.rating FROM "LIBRARY_APP".library.read_book b
+JOIN "LIBRARY_APP".library.book a on a.id = b.book_id
+JOIN "LIBRARY_APP".library.rating r on r.id=b.rating
+where b.user_id = (SELECT id from "LIBRARY_APP".library."user" u where u.login='andrey');
+
+
+SELECT a.name, a.release_date FROM "LIBRARY_APP".library.book_author b
+JOIN "LIBRARY_APP".library.book a on a.id = b.book_id
+where b.author_id = (SELECT id from "LIBRARY_APP".library.author u where u.name='Terry Pratchett');
+
+
+SELECT a.name, a.release_date FROM "LIBRARY_APP".library.book_genre b
+JOIN "LIBRARY_APP".library.book a on a.id = b.book_id
+where b.genre_id = (SELECT id from "LIBRARY_APP".library.genre u where u.name='Comedy');

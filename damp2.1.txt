@@ -1,0 +1,104 @@
+create table author
+(
+    id   serial  not null primary key,
+    name varchar not null unique 
+);
+
+create table publishing_company
+(
+    id   serial  not null primary key,
+    name varchar not null unique 
+);
+
+create table rating
+(
+    id     serial  not null primary key,
+    rating varchar not null unique 
+);
+
+create table genre
+(
+    id   serial  not null primary key,
+    name varchar not null unique 
+);
+
+create table "user"
+(
+    id       serial  not null primary key,
+    login    varchar not null unique,
+    password varchar not null,
+    name     varchar
+);
+
+create table book
+(
+    id           serial  not null primary key,
+    name         varchar not null,
+    release_date date    not null,
+    link_to_file varchar not null unique,
+    company_id   integer
+        constraint publishing_company___fk
+            references publishing_company(id)
+                on update set null on delete set null
+);
+
+
+create table book_author
+(
+    id        serial  not null primary key,
+    book_id   integer not null
+        constraint book_id___fk
+            references book(id)
+            on update cascade on delete cascade,
+    author_id integer not null
+        constraint author_id___fk
+            references author(id)
+            on update cascade on delete cascade
+);
+
+
+create table book_genre
+(
+    id       serial  not null primary key,
+    book_id  integer not null
+        constraint book_id___fk
+            references book(id)
+            on update cascade on delete cascade,
+    genre_id integer not null
+        constraint genre_id___fk
+            references genre(id)
+            on update cascade on delete cascade
+);
+
+
+create table book_mark
+(
+    id      serial  not null primary key,
+    book_id integer not null
+        constraint book_id___fk
+            references book(id)
+            on update cascade on delete cascade,
+    user_id integer not null
+        references "user"(id)
+            on update cascade on delete cascade,
+    page    integer not null
+);
+
+
+create table read_book
+(
+    id      serial  not null primary key,
+    book_id integer not null
+        constraint read_book_id___fk
+            references book(id)
+            on update cascade on delete cascade,
+    user_id integer not null
+        constraint user_id___fk
+            references "user"(id)
+            on update cascade on delete cascade,
+    rating  integer not null
+        constraint rating_id___fk
+            references rating(id)
+            on update set null on delete set null
+);
+Commit;

@@ -1,0 +1,246 @@
+create table author
+(
+    id   serial  not null
+        constraint author_pk
+            primary key,
+    name varchar not null
+);
+
+alter table author
+    owner to admin;
+
+create unique index author_id_uindex
+    on author (id);
+
+create unique index author_name_uindex
+    on author (name);
+
+
+
+
+
+
+create table book
+(
+    id           serial  not null
+        constraint book_pk
+            primary key,
+    name         varchar not null,
+    release_date date    not null,
+    link_to_file varchar not null,
+    company_id   integer
+        constraint publishing_company___fk
+            references publishing_company
+            on update set null on delete set null
+);
+
+alter table book
+    owner to admin;
+
+create unique index book_id_uindex
+    on book (id);
+
+create unique index book_link_to_file_uindex
+    on book (link_to_file);
+
+
+
+
+
+
+create table book_author
+(
+    id        serial  not null
+        constraint book_author_pk
+            primary key,
+    book_id   integer not null
+        constraint book_id___fk
+            references book
+            on update cascade on delete cascade,
+    author_id integer not null
+        constraint author_id___fk
+            references author
+            on update cascade on delete cascade
+);
+
+alter table book_author
+    owner to admin;
+
+create unique index book_author_id_uindex
+    on book_author (id);
+
+
+
+
+
+
+create table book_genre
+(
+    id       serial  not null
+        constraint book_genre_pk
+            primary key,
+    book_id  integer not null
+        constraint book_id___fk
+            references book
+            on update cascade on delete cascade,
+    genre_id integer not null
+        constraint genre_id___fk
+            references genre
+            on update cascade on delete cascade
+);
+
+alter table book_genre
+    owner to admin;
+
+create unique index book_genre_id_uindex
+    on book_genre (id);
+
+
+
+
+
+
+create table book_mark
+(
+    id      serial  not null
+        constraint book_mark_pk
+            primary key,
+    book_id integer not null
+        constraint book_id___fk
+            references book
+            on update cascade on delete cascade,
+    user_id integer not null
+        constraint user_id___fk
+            references "user"
+            on update cascade on delete cascade,
+    page    integer not null
+);
+
+alter table book_mark
+    owner to admin;
+
+create unique index book_mark_id_uindex
+    on book_mark (id);
+
+
+
+
+
+
+
+create table genre
+(
+    id   serial  not null
+        constraint genre_pk
+            primary key,
+    name varchar not null
+);
+
+alter table genre
+    owner to admin;
+
+create unique index genre_id_uindex
+    on genre (id);
+
+create unique index genre_name_uindex
+    on genre (name);
+
+
+
+
+
+
+
+create table publishing_company
+(
+    id   serial  not null
+        constraint publishing_company_pk
+            primary key,
+    name varchar not null
+);
+
+alter table publishing_company
+    owner to admin;
+
+create unique index publishing_company_id_uindex
+    on publishing_company (id);
+
+create unique index publishing_company_name_uindex
+    on publishing_company (name);
+
+
+
+
+
+create table rating
+(
+    id     serial  not null
+        constraint rating_pk
+            primary key,
+    rating varchar not null
+);
+
+alter table rating
+    owner to admin;
+
+create unique index rating_id_uindex
+    on rating (id);
+
+create unique index rating_rating_uindex
+    on rating (rating);
+
+
+
+
+
+
+
+create table read_book
+(
+    id      serial  not null
+        constraint read_book_pk
+            primary key,
+    book_id integer not null
+        constraint read_book_id___fk
+            references book
+            on update cascade on delete cascade,
+    user_id integer not null
+        constraint user_id___fk
+            references "user"
+            on update cascade on delete cascade,
+    rating  integer not null
+        constraint rating_id___fk
+            references rating
+            on update set null on delete set null
+);
+
+alter table read_book
+    owner to admin;
+
+create unique index read_book_id_uindex
+    on read_book (id);
+
+
+
+
+
+
+
+create table "user"
+(
+    id       serial  not null
+        constraint user_pk
+            primary key,
+    login    varchar not null,
+    password varchar not null,
+    name     varchar
+);
+
+alter table "user"
+    owner to admin;
+
+create unique index user_id_uindex
+    on "user" (id);
+
+create unique index user_login_uindex
+    on "user" (login);

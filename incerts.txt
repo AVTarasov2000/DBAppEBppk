@@ -1,0 +1,27 @@
+INSERT INTO "LIBRARY_APP".library."user"(login, password, name) values ('andrey', 'tarasov', 'abdyabdya');
+INSERT INTO "LIBRARY_APP".library.publishing_company(name) values ('company');
+INSERT INTO "LIBRARY_APP".library.rating(rating) values ('very bad');
+INSERT INTO "LIBRARY_APP".library.author(name) values ('Terry Pratchett');
+INSERT INTO "LIBRARY_APP".library.genre(name) values ('Comedy');
+
+
+INSERT INTO "LIBRARY_APP".library.book(name, release_date, link_to_file, company_id)
+values ('451 градус по фрг', to_date('20/01/2000','dd/mm/yyyy'), 'c:a/abdyabdya', (SELECT id FROM "LIBRARY_APP".library.publishing_company where name = 'company'));
+
+INSERT INTO "LIBRARY_APP".library.book_author(book_id, author_id)
+values ((SELECT id FROM "LIBRARY_APP".library.book where name = '451 градус по фрг'),
+        (SELECT id FROM "LIBRARY_APP".library.author where name = 'Terry Pratchett'));
+
+INSERT INTO "LIBRARY_APP".library.book_genre(book_id, genre_id)
+values ((SELECT id FROM "LIBRARY_APP".library.book where name = '451 градус по фрг'),
+        (SELECT id FROM "LIBRARY_APP".library.genre where name = 'Comedy'));
+
+INSERT INTO "LIBRARY_APP".library.book_mark(book_id, user_id, page)
+values ((SELECT id FROM "LIBRARY_APP".library.book where name = '451 градус по фрг'),
+        (SELECT id FROM "LIBRARY_APP".library."user" where login = 'andrey'), 123);
+
+INSERT INTO "LIBRARY_APP".library.read_book(book_id, user_id, rating)
+values ((SELECT id FROM "LIBRARY_APP".library.book where name = '451 градус по фрг'),
+        (SELECT id FROM "LIBRARY_APP".library."user" where login = 'andrey'),
+        (SELECT id FROM "LIBRARY_APP".library.rating where rating.rating = 'very bad'));
+Commit;

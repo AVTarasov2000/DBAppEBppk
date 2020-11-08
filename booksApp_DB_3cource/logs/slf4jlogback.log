@@ -1,0 +1,12 @@
+04.11.2020 21:35:27.550 [main] INFO   cs.vsu.Slf4jLogbackExampleApp - Just a log message.
+04.11.2020 21:35:27.553 [main] DEBUG  cs.vsu.Slf4jLogbackExampleApp - Message for debug level.
+04.11.2020 21:35:27.574 [main] ERROR  cs.vsu.Slf4jLogbackExampleApp - Failed to read file /file/does/not/exist.
+java.nio.file.NoSuchFileException: /file/does/not/exist
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:116)
+	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:215)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:369)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:415)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3210)
+	at cs.vsu.Slf4jLogbackExampleApp.main(cs.vsu.Slf4jLogbackExampleApp.java:18)

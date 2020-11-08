@@ -1,0 +1,98 @@
+[2020-10-08 15:59:54] Connected to LIBRARY_APP
+LIBRARY_APP> INSERT INTO "test".public."user"(login, password, name) values ('user1', '1user', 'vialet')
+[2020-10-08 15:59:54] [0A000] ERROR: cross-database references are not implemented: "test.public.user"
+[2020-10-08 15:59:54] Position: 13
+LIBRARY_APP> SERT INTO "LIBRARY_APP".library."user"(login, password, name) values ('user1', '1user', 'vialet');
+             INSERT INTO "LIBRARY_APP".library.publishing_company(name) values ('new Company 1');
+             INSERT INTO "LIBRARY_APP".library.rating(rating) values ('not bad');
+             INSERT INTO "LIBRARY_APP".library.author(name) values ('Akunin');
+             INSERT INTO "LIBRARY_APP".library.genre(name) values ('drama');
+             Commit;
+[2020-10-08 16:00:33] [42601] ERROR: syntax error at or near "SERT"
+[2020-10-08 16:00:33] Position: 1
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library."user"(login, password, name) values ('user1', '1user', 'vialet')
+[2020-10-08 16:00:40] 1 row affected in 15 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.publishing_company(name) values ('new Company 1')
+[2020-10-08 16:00:40] 1 row affected in 6 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.rating(rating) values ('not bad')
+[2020-10-08 16:00:40] 1 row affected in 3 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.author(name) values ('Akunin')
+[2020-10-08 16:00:40] 1 row affected in 5 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.genre(name) values ('drama')
+[2020-10-08 16:00:40] 1 row affected in 5 ms
+LIBRARY_APP.public> Commit
+[2020-10-08 16:00:40] [25P01] there is no transaction in progress
+[2020-10-08 16:00:40] completed in 3 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library."user"(login, password, name) values ('user2', '2user', 'sherbet')
+[2020-10-08 16:01:25] 1 row affected in 13 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.publishing_company(name) values ('new Company 2')
+[2020-10-08 16:01:25] 1 row affected in 8 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.rating(rating) values ('good')
+[2020-10-08 16:01:25] 1 row affected in 3 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.author(name) values ('Pushkin')
+[2020-10-08 16:01:25] 1 row affected in 8 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.genre(name) values ('fantasy')
+[2020-10-08 16:01:25] 1 row affected in 1 ms
+LIBRARY_APP.public> Commit
+[2020-10-08 16:01:25] [25P01] there is no transaction in progress
+[2020-10-08 16:01:25] completed in 2 ms
+LIBRARY_APP.public> INSERT INTO "test".public.book(name, release_date, link_to_file, company_id)
+                    values ('good omens', to_date('20/01/1999','dd/mm/yyyy'), 'somwhere' , (SELECT id FROM "test".public.publishing_company where name = 'new Company 1'))
+[2020-10-08 16:03:16] [0A000] ERROR: cross-database references are not implemented: "test.public.book"
+[2020-10-08 16:03:16] Position: 13
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.book(name, release_date, link_to_file, company_id)
+                    values ('good omens', to_date('20/01/1999','dd/mm/yyyy'), 'somwhere' , (SELECT id FROM "test".public.publishing_company where name = 'new Company 1'))
+[2020-10-08 16:03:40] [0A000] ERROR: cross-database references are not implemented: "test.public.publishing_company"
+[2020-10-08 16:03:40] Position: 173
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.book(name, release_date, link_to_file, company_id)
+                    values ('good omens', to_date('20/01/1999','dd/mm/yyyy'), 'somwhere' , (SELECT id FROM "LIBRARY_APP".library.publishing_company where name = 'new Company 1'))
+[2020-10-08 16:03:56] 1 row affected in 13 ms
+LIBRARY_APP.public> INSERT INTO "test".public.book_author(book_id, author_id)
+                    values ((SELECT id FROM "test".public.book where name = 'good omens'),
+                            (SELECT id FROM "test".public.author where name = 'Terry Pratchett'))
+[2020-10-08 16:04:44] [0A000] ERROR: cross-database references are not implemented: "test.public.book_author"
+[2020-10-08 16:04:44] Position: 13
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.book_author(book_id, author_id)
+                    values ((SELECT id FROM "LIBRARY_APP".library.book where name = 'good omens'),
+                            (SELECT id FROM "LIBRARY_APP".library.author where name = 'Terry Pratchett'))
+[2020-10-08 16:05:02] 1 row affected in 16 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.book_author(book_id, author_id)
+                    values ((SELECT id FROM "LIBRARY_APP".library.book where name = 'good omens'),
+                            (SELECT id FROM "LIBRARY_APP".library.author where name = 'Pushkin'))
+[2020-10-08 16:05:17] 1 row affected in 13 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.book_genre(book_id, genre_id)
+                    values ((SELECT id FROM "LIBRARY_APP".library.book where name = 'good omens'),
+                            (SELECT id FROM "LIBRARY_APP".library.genre where name = 'fantasy'))
+[2020-10-08 16:06:03] 1 row affected in 7 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.book_mark(book_id, user_id, page)
+                    values ((SELECT id FROM "LIBRARY_APP".library.book where name = 'good omens'),
+                            (SELECT id FROM "LIBRARY_APP".library."user" where login = 'andrey'), 1)
+[2020-10-08 16:08:31] 1 row affected in 13 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.read_book(book_id, user_id, rating)
+                    values ((SELECT id FROM "LIBRARY_APP".library.book where name = 'good omens'),
+                            (SELECT id FROM "LIBRARY_APP".library."user" where login = 'user2'),
+                            (SELECT id FROM "LIBRARY_APP".library.rating where rating.rating = 'good'))
+[2020-10-08 16:08:37] 1 row affected in 18 ms
+LIBRARY_APP.public> Commit
+[2020-10-08 16:08:40] [25P01] there is no transaction in progress
+[2020-10-08 16:08:40] completed in 4 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.book(name, release_date, link_to_file, company_id)
+                    values ('voyna i mir', to_date('20/01/1999','dd/mm/yyyy'), 'somwhere' , (SELECT id FROM "LIBRARY_APP".library.publishing_company where name = 'new Company 2'))
+[2020-10-08 16:10:04] [23505] ERROR: duplicate key value violates unique constraint "book_link_to_file_uindex"
+[2020-10-08 16:10:04] Detail: Key (link_to_file)=(somwhere) already exists.
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.book(name, release_date, link_to_file, company_id)
+                    values ('voyna i mir', to_date('20/01/1999','dd/mm/yyyy'), 'somwhereelse' , (SELECT id FROM "LIBRARY_APP".library.publishing_company where name = 'new Company 2'))
+[2020-10-08 16:10:15] 1 row affected in 8 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.book_mark(book_id, user_id, page)
+                    values ((SELECT id FROM "LIBRARY_APP".library.book where name = 'voyna i mir'),
+                            (SELECT id FROM "LIBRARY_APP".library."user" where login = 'andrey'), 12)
+[2020-10-08 16:11:05] 1 row affected in 2 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.book_mark(book_id, user_id, page)
+                    values ((SELECT id FROM "LIBRARY_APP".library.book where name = 'voyna i mir'),
+                            (SELECT id FROM "LIBRARY_APP".library."user" where login = 'user1'), 300)
+[2020-10-08 16:11:44] 1 row affected in 10 ms
+LIBRARY_APP.public> INSERT INTO "LIBRARY_APP".library.read_book(book_id, user_id, rating)
+                    values ((SELECT id FROM "LIBRARY_APP".library.book where name = 'good omens'),
+                            (SELECT id FROM "LIBRARY_APP".library."user" where login = 'andrey'),
+                            (SELECT id FROM "LIBRARY_APP".library.rating where rating.rating = 'good'))
+[2020-10-08 16:13:13] 1 row affected in 51 ms
