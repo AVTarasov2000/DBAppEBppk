@@ -6,8 +6,9 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "read_book")
-public class UsersRating {
+@Table(name = "book_mark")
+public class BookMark {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
@@ -19,20 +20,15 @@ public class UsersRating {
     @Column(name = "user_id")
     @Getter @Setter
     Integer userId;
-    @Column(name = "rating")
+    @Column(name = "page")
     @Getter @Setter
     Integer page;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
     @Getter @Setter
     Book books;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     @Getter @Setter
     User user;
-    @ManyToOne
-    @JoinColumn(name = "rating", insertable = false, updatable = false)
-    @Getter @Setter
-    Rating rating;
-
 }

@@ -1,7 +1,6 @@
 package cs.vsu.dao;
 
-import cs.vsu.config.HibernateConfig;
-import cs.vsu.utils.HibernateSessionFactoryUtil;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,12 +14,13 @@ import java.util.List;
 @Repository
 public class DaoImpl<T> implements Dao<T> {
 
-    SessionFactory sessionFactory;
 
-//    @Autowired
-//    public void setSessionFactory(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
+    private SessionFactory sessionFactory;
+
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     @Transactional
@@ -63,8 +63,7 @@ public class DaoImpl<T> implements Dao<T> {
 
     @Override
     @Transactional
-    @SuppressWarnings("unchecked")
-    public List <T> getAll(Integer id, Class<T> tClass) {
+    public List <T> getAll(Class<T> tClass) {
         Session session = sessionFactory.openSession();
         String table = tClass.getAnnotation(Table.class).name();
         List res = sessionFactory.getCurrentSession().createQuery("FROM "+table).list();
