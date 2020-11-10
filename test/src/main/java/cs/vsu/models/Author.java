@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="author")
+@Table(name="library.author", schema = "library")
 public class Author {
 
     @Id

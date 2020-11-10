@@ -7,7 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "library.user", schema = "library")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

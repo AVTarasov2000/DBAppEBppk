@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "read_book")
+@Table(name = "library.read_book", schema = "library")
 public class UsersRating {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

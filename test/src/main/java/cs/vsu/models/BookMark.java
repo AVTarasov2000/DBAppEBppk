@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "book_mark")
+@Table(name = "library.book_mark", schema = "library")
 public class BookMark {
 
     @Id

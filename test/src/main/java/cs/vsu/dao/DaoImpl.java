@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Table;
 import java.util.List;
 
 @Repository
@@ -65,8 +64,8 @@ public class DaoImpl<T> implements Dao<T> {
     @Transactional
     public List <T> getAll(Class<T> tClass) {
         Session session = sessionFactory.openSession();
-        String table = tClass.getAnnotation(Table.class).name();
-        List res = sessionFactory.getCurrentSession().createQuery("FROM "+table).list();
+        String table = tClass.getName();
+        List<T> res = session.createQuery("FROM "+table, tClass).getResultList();
         session.close();
         return res;
     }

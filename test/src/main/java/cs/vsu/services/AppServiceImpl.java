@@ -4,9 +4,10 @@ import cs.vsu.dao.Dao;
 import cs.vsu.dto.AuthorDTO;
 import cs.vsu.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 import java.util.List;
-@org.springframework.stereotype.Service
+
+@Service
 public class AppServiceImpl implements AppService {
 
     private Dao<Author> authorDao;
@@ -20,7 +21,7 @@ public class AppServiceImpl implements AppService {
 
     @Override
     public List <AuthorDTO> getAllAuthors() {
-        authorDao.getAll(Author.class);
+        authorDao.getAll(Author.class).forEach(System.out::println);
         return null;
     }
 
@@ -32,7 +33,7 @@ public class AppServiceImpl implements AppService {
 
 
 
-    ///getters--------------------------------------------------------------------------------
+    ///setters--------------------------------------------------------------------------------
     @Autowired
     public void setAuthorDao(Dao <Author> authorDao) {
         this.authorDao = authorDao;

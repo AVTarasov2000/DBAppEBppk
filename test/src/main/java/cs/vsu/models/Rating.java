@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "rating")
+@Table(name = "library.rating", schema = "library")
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

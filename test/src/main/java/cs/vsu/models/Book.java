@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "book")
+@Table(name = "library.book", schema = "library")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
