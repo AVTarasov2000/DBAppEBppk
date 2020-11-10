@@ -44,7 +44,7 @@ public class Book {
             inverseJoinColumns = { @JoinColumn(name = "id") }
     )
     @Getter @Setter
-    Set <Genre> genres= new HashSet <>();
+    Set <Genre> genres;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "company_id")

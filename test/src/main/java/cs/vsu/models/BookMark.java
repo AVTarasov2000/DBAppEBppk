@@ -23,11 +23,11 @@ public class BookMark {
     @Column(name = "page")
     @Getter @Setter
     Integer page;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
     @Getter @Setter
     Book books;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     @Getter @Setter
     User user;
