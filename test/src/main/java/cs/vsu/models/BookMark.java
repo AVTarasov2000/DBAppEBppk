@@ -1,5 +1,7 @@
 package cs.vsu.models;
 
+import cs.vsu.annotations.DAO;
+import cs.vsu.dto.BookMarkDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "library.book_mark", schema = "library")
+@DAO(targetClass = BookMarkDTO.class)
 public class BookMark {
 
     @Id

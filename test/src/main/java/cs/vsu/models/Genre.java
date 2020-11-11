@@ -1,5 +1,7 @@
 package cs.vsu.models;
 
+import cs.vsu.annotations.DAO;
+import cs.vsu.dto.GenreDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "library.genre", schema = "library")
+@DAO(targetClass = GenreDTO.class)
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

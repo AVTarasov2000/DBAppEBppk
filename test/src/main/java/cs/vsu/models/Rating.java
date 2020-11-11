@@ -1,5 +1,7 @@
 package cs.vsu.models;
 
+import cs.vsu.annotations.DAO;
+import cs.vsu.dto.RatingDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "library.rating", schema = "library")
+@DAO(targetClass = RatingDTO.class)
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,5 +1,7 @@
 package cs.vsu.models;
 
+import cs.vsu.annotations.DAO;
+import cs.vsu.dto.UsersRatingDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "library.read_book", schema = "library")
+@DAO(targetClass = UsersRatingDTO.class)
 public class UsersRating {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
