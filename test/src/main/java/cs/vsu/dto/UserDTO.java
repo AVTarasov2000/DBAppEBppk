@@ -1,6 +1,6 @@
 package cs.vsu.dto;
 
-import cs.vsu.annotations.DTO;
+import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.Many;
 import cs.vsu.models.User;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
-@DTO(targetClass = User.class)
+@DTODAO(targetClass = User.class)
 public class UserDTO {
     @Getter
     @Setter

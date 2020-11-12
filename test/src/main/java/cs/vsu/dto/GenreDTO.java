@@ -1,6 +1,6 @@
 package cs.vsu.dto;
 
-import cs.vsu.annotations.DTO;
+import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.Many;
 import cs.vsu.models.Genre;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
-@DTO(targetClass = Genre.class)
+@DTODAO(targetClass = Genre.class)
 public class GenreDTO {
 
     @Getter

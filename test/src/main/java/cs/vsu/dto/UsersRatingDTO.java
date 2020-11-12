@@ -1,12 +1,12 @@
 package cs.vsu.dto;
 
-import cs.vsu.annotations.DTO;
+import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.One;
 import cs.vsu.models.UsersRating;
 import lombok.Getter;
 import lombok.Setter;
 
-@DTO(targetClass = UsersRating.class)
+@DTODAO(targetClass = UsersRating.class)
 public class UsersRatingDTO {
     @Getter
     @Setter

@@ -1,6 +1,6 @@
 package cs.vsu.models;
 
-import cs.vsu.annotations.DAO;
+import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.One;
 import cs.vsu.dto.BookMarkDTO;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "library.book_mark", schema = "library")
-@DAO(targetClass = BookMarkDTO.class)
+@DTODAO(targetClass = BookMarkDTO.class)
 public class BookMark {
 
     @Id

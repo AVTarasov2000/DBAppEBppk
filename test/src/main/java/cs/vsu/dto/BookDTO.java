@@ -1,6 +1,6 @@
 package cs.vsu.dto;
 
-import cs.vsu.annotations.DTO;
+import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.Many;
 import cs.vsu.annotations.One;
 import cs.vsu.models.Book;
@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@DTO(targetClass = Book.class)
+@DTODAO(targetClass = Book.class)
 public class BookDTO {
 
     @Getter

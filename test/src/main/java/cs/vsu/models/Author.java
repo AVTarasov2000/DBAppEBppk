@@ -1,7 +1,7 @@
 package cs.vsu.models;
 
 
-import cs.vsu.annotations.DAO;
+import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.Many;
 import cs.vsu.dto.AuthorDTO;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="library.author", schema = "library")
-@DAO(targetClass = AuthorDTO.class)
+@DTODAO(targetClass = AuthorDTO.class)
 public class Author {
 
     @Id

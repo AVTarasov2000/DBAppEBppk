@@ -1,13 +1,13 @@
 package cs.vsu.dto;
 
 
-import cs.vsu.annotations.DTO;
+import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.One;
 import cs.vsu.models.BookMark;
 import lombok.Getter;
 import lombok.Setter;
 
-@DTO(targetClass = BookMark.class)
+@DTODAO(targetClass = BookMark.class)
 public class BookMarkDTO {
 
     @Getter

@@ -1,6 +1,6 @@
 package cs.vsu.models;
 
-import cs.vsu.annotations.DAO;
+import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.Many;
 import cs.vsu.annotations.One;
 import cs.vsu.dto.BookDTO;
@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "library.book", schema = "library")
-@DAO(targetClass = BookDTO.class)
+@DTODAO(targetClass = BookDTO.class)
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

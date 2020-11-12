@@ -1,41 +1,34 @@
 package cs.vsu.utils;
 
-import cs.vsu.annotations.DAO;
-import cs.vsu.annotations.DTO;
+import cs.vsu.annotations.DTODAO;
+import cs.vsu.annotations.Many;
+import cs.vsu.annotations.One;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.AnnotationTypeMismatchException;
 import java.lang.reflect.Field;
+import java.util.Set;
 
 @Component
 public class DtoDaoConverter {
 
     @SneakyThrows
-    public Object fromDTOtoDAO(Object dto){
-        if(!dto.getClass().isAnnotationPresent(DTO.class)){
-            throw new AnnotationTypeMismatchException(null,"no DTO annotation");
+    public Object convert(Object dto) {
+        if (!dto.getClass().isAnnotationPresent(DTODAO.class)) {
+            throw new AnnotationTypeMismatchException(null, "no DTO annotation");
         }
-        Object obj = dto.getClass().getAnnotation(DTO.class).targetClass().getDeclaredConstructor().newInstance();
-        for (Field field:
-            dto.getClass().getDeclaredFields()){
-            obj.getClass().getField(field.getName()).set(obj,field.get(dto));
-        }
-        return obj;
-    }
-
-    @SneakyThrows
-    public Object fromDAOtoDTO(Object dao){
-        if(!dao.getClass().isAnnotationPresent(DAO.class)){
-            throw new AnnotationTypeMismatchException(null,"no DTO annotation");
-        }
-        Object obj = dao.getClass().getAnnotation(DTO.class).targetClass().getDeclaredConstructor().newInstance();
-        for (Field field:
-                dao.getClass().getDeclaredFields()){
-            obj.getClass().getField(field.getName()).set(obj,field.get(dao));
+        Object obj = dto.getClass().getAnnotation(DTODAO.class).targetClass().getDeclaredConstructor().newInstance();
+        for (Field field :
+                dto.getClass().getDeclaredFields()) {
+            if (field.isAnnotationPresent(One.class)) {
+                field.set(obj, convert(field.get(dto)));
+            } else if (field.isAnnotationPresent(Many.class)) {
+                ((Set) field.get(obj)).add(convert(field.get(dto)));
+            } else {
+                obj.getClass().getField(field.getName()).set(obj, field.get(dto));
+            }
         }
         return obj;
     }
-
-
 }
