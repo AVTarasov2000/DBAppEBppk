@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 import java.util.Set;
 
 @Component
-public class DtoDaoConverter {
+public class DtoDaoConverter implements Converter{
 
     @SneakyThrows
     public Object convert(Object dto) {

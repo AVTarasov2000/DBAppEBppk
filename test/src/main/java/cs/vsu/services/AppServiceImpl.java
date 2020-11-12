@@ -3,6 +3,7 @@ package cs.vsu.services;
 import cs.vsu.dao.Dao;
 import cs.vsu.dto.AuthorDTO;
 import cs.vsu.models.*;
+import cs.vsu.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -18,10 +19,14 @@ public class AppServiceImpl implements AppService {
     private Dao<Rating> ratingDao;
     private Dao<User> userDao;
     private Dao<UsersRating> usersRatingDao;
+    private Converter converter;
 
     @Override
     public List <AuthorDTO> getAllAuthors() {
-        authorDao.getAll(Author.class).forEach(System.out::println);
+        List<Author> authors = authorDao.getAll(Author.class);
+        authors.forEach(System.out::println);
+        System.out.println(converter.convert(authors.get(0)));
+
         return null;
     }
 
@@ -34,6 +39,10 @@ public class AppServiceImpl implements AppService {
 
 
     ///setters--------------------------------------------------------------------------------
+    @Autowired
+    public void setConverter(Converter converter) {
+        this.converter = converter;
+    }
     @Autowired
     public void setAuthorDao(Dao <Author> authorDao) {
         this.authorDao = authorDao;
