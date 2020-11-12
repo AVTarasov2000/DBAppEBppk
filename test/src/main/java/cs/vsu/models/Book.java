@@ -1,6 +1,8 @@
 package cs.vsu.models;
 
 import cs.vsu.annotations.DAO;
+import cs.vsu.annotations.Many;
+import cs.vsu.annotations.One;
 import cs.vsu.dto.BookDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,7 +39,7 @@ public class Book {
             joinColumns = { @JoinColumn(name = "book_id") },
             inverseJoinColumns = { @JoinColumn(name = "id") }
     )
-    @Getter @Setter
+    @Getter @Setter @Many
     Set <Author> authors = new HashSet <>();
 
     @ManyToMany(cascade = {CascadeType.ALL})
@@ -46,11 +48,11 @@ public class Book {
             joinColumns = { @JoinColumn(name = "book_id") },
             inverseJoinColumns = { @JoinColumn(name = "id") }
     )
-    @Getter @Setter
+    @Getter @Setter @Many
     Set <Genre> genres = new HashSet <>();
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "company_id")
-    @Getter @Setter
+    @Getter @Setter @One
     PublishingCompany publishingCompany;
 }

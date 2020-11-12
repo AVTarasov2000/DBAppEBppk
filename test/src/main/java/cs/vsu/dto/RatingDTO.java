@@ -1,6 +1,7 @@
 package cs.vsu.dto;
 
 import cs.vsu.annotations.DTO;
+import cs.vsu.annotations.Many;
 import cs.vsu.models.Rating;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,6 @@ public class RatingDTO {
     @Getter @Setter
     String name;
 
-    @Getter @Setter
+    @Getter @Setter @Many
     Set <UsersRatingDTO> usersRatings = new HashSet <>();
 }

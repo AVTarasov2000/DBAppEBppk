@@ -2,6 +2,7 @@ package cs.vsu.models;
 
 
 import cs.vsu.annotations.DAO;
+import cs.vsu.annotations.Many;
 import cs.vsu.dto.UserDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +32,7 @@ public class User {
     String name;
     @OneToMany
     @JoinColumn(name = "user_id")
-    @Getter @Setter
+    @Getter @Setter @Many
     Set <BookMark> bookMarks = new HashSet <>();
 
 }

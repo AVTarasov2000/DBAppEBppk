@@ -2,6 +2,7 @@ package cs.vsu.models;
 
 
 import cs.vsu.annotations.DAO;
+import cs.vsu.annotations.Many;
 import cs.vsu.dto.AuthorDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +29,6 @@ public class Author {
             joinColumns = { @JoinColumn(name = "author_id") },
             inverseJoinColumns = { @JoinColumn(name = "id") }
     )
-    @Getter @Setter
+    @Getter @Setter @Many
     Set <Book> books = new HashSet <>();;
 }

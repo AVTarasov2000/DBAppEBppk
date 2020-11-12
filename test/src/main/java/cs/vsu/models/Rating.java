@@ -1,6 +1,7 @@
 package cs.vsu.models;
 
 import cs.vsu.annotations.DAO;
+import cs.vsu.annotations.Many;
 import cs.vsu.dto.RatingDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,6 @@ public class Rating {
     String name;
     @OneToMany
     @JoinColumn(name = "id")
-    @Getter @Setter
+    @Getter @Setter @Many
     Set <UsersRating> usersRatings = new HashSet <>();
 }

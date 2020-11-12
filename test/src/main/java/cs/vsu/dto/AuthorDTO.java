@@ -1,6 +1,7 @@
 package cs.vsu.dto;
 
 import cs.vsu.annotations.DTO;
+import cs.vsu.annotations.Many;
 import cs.vsu.models.Author;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,6 @@ public class AuthorDTO {
     Integer id;
     @Getter @Setter
     String name;
-    @Getter @Setter
+    @Getter @Setter @Many
     Set <BookDTO> books = new HashSet <>();;
 }

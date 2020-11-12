@@ -1,6 +1,7 @@
 package cs.vsu.dto;
 
 import cs.vsu.annotations.DTO;
+import cs.vsu.annotations.One;
 import cs.vsu.models.UsersRating;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,10 +17,10 @@ public class UsersRatingDTO {
     Integer userId;
     @Getter @Setter
     Integer page;
-    @Getter @Setter
+    @Getter @Setter @One
     BookDTO books;
-    @Getter @Setter
+    @Getter @Setter @One
     UserDTO user;
-    @Getter @Setter
+    @Getter @Setter @One
     RatingDTO rating;
 }

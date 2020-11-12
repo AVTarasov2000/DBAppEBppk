@@ -1,6 +1,7 @@
 package cs.vsu.models;
 
 import cs.vsu.annotations.DAO;
+import cs.vsu.annotations.One;
 import cs.vsu.dto.UsersRatingDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,15 +28,15 @@ public class UsersRating {
     Integer page;
     @ManyToOne
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
-    @Getter @Setter
+    @Getter @Setter @One
     Book books;
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    @Getter @Setter
+    @Getter @Setter @One
     User user;
     @ManyToOne
     @JoinColumn(name = "rating", insertable = false, updatable = false)
-    @Getter @Setter
+    @Getter @Setter @One
     Rating rating;
 
 }

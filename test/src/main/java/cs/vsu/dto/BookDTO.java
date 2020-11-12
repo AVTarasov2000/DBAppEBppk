@@ -1,6 +1,8 @@
 package cs.vsu.dto;
 
 import cs.vsu.annotations.DTO;
+import cs.vsu.annotations.Many;
+import cs.vsu.annotations.One;
 import cs.vsu.models.Book;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,11 +25,11 @@ public class BookDTO {
     String linkToFile;
     @Getter @Setter
     Integer companyId;
-    @Getter @Setter
+    @Getter @Setter @Many
     Set <AuthorDTO> authors = new HashSet <>();
-    @Getter @Setter
+    @Getter @Setter @Many
     Set <GenreDTO> genres= new HashSet <>();
-    @Getter @Setter
+    @Getter @Setter @One
     PublishingCompanyDTO publishingCompany;
 
 }

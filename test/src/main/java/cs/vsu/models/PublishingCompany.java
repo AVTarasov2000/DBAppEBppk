@@ -1,6 +1,7 @@
 package cs.vsu.models;
 
 import cs.vsu.annotations.DAO;
+import cs.vsu.annotations.Many;
 import cs.vsu.dto.PublishingCompanyDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,6 @@ public class PublishingCompany {
     String name;
     @OneToMany
     @JoinColumn(name = "company_id")
-    @Getter @Setter
+    @Getter @Setter @Many
     Set <Book> books = new HashSet <>();
 }

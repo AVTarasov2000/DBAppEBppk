@@ -1,6 +1,7 @@
 package cs.vsu.dto;
 
 import cs.vsu.annotations.DTO;
+import cs.vsu.annotations.Many;
 import cs.vsu.models.Genre;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,6 @@ public class GenreDTO {
     @Getter @Setter
     String name;
 
-    @Getter @Setter
+    @Getter @Setter @Many
     Set <BookDTO> books = new HashSet <>();
 }

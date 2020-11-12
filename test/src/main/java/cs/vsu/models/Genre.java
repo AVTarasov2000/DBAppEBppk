@@ -1,6 +1,7 @@
 package cs.vsu.models;
 
 import cs.vsu.annotations.DAO;
+import cs.vsu.annotations.Many;
 import cs.vsu.dto.GenreDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +29,7 @@ public class Genre {
             joinColumns = { @JoinColumn(name = "book_id") },
             inverseJoinColumns = { @JoinColumn(name = "id") }
     )
-    @Getter @Setter
+    @Getter @Setter @Many
     Set <Book> books = new HashSet <>();
 
 }

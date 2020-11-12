@@ -1,6 +1,7 @@
 package cs.vsu.models;
 
 import cs.vsu.annotations.DAO;
+import cs.vsu.annotations.One;
 import cs.vsu.dto.BookMarkDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,10 +29,10 @@ public class BookMark {
     Integer page;
     @ManyToOne
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
-    @Getter @Setter
+    @Getter @Setter @One
     Book books;
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    @Getter @Setter
+    @Getter @Setter @One
     User user;
 }
