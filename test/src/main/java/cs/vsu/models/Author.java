@@ -19,10 +19,10 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter @Setter
-    Integer id;
+    private Integer id;
     @Column(name = "name")
     @Getter @Setter
-    String name;
+    private String name;
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "book_author",
@@ -30,5 +30,5 @@ public class Author {
             inverseJoinColumns = { @JoinColumn(name = "id") }
     )
     @Getter @Setter @Many
-    Set <Book> books = new HashSet <>();;
+    private Set <Book> books = new HashSet <>();;
 }

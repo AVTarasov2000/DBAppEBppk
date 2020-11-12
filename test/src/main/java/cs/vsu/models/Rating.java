@@ -17,12 +17,12 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter @Setter
-    Integer id;
+    private Integer id;
     @Column(name = "rating")
     @Getter @Setter
-    String name;
+    private String name;
     @OneToMany
     @JoinColumn(name = "id")
     @Getter @Setter @Many
-    Set <UsersRating> usersRatings = new HashSet <>();
+    private Set <UsersRating> usersRatings = new HashSet <>();
 }

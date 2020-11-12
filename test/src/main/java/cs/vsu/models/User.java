@@ -20,19 +20,19 @@ public class User {
     @Getter
     @Setter
     @Column(name = "id")
-    Integer id;
+    private Integer id;
     @Column(name = "login")
     @Getter @Setter
-    String login;
+    private String login;
     @Column(name = "password")
     @Getter @Setter
-    String password;
+    private String password;
     @Column(name = "name")
     @Getter @Setter
-    String name;
+    private String name;
     @OneToMany
     @JoinColumn(name = "user_id")
     @Getter @Setter @Many
-    Set <BookMark> bookMarks = new HashSet <>();
+    private Set <BookMark> bookMarks = new HashSet <>();
 
 }

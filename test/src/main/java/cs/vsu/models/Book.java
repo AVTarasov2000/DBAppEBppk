@@ -19,19 +19,19 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter @Setter
-    Integer id;
+    private Integer id;
     @Column(name = "name")
     @Getter @Setter
-    String name;
+    private String name;
     @Column(name = "release_date")
     @Getter @Setter
-    Date releaseDate;
+    private Date releaseDate;
     @Column(name = "link_to_file")
     @Getter @Setter
-    String linkToFile;
+    private String linkToFile;
     @Column(name = "company_id", insertable = false, updatable = false)
     @Getter @Setter
-    Integer companyId;
+    private Integer companyId;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -40,7 +40,7 @@ public class Book {
             inverseJoinColumns = { @JoinColumn(name = "id") }
     )
     @Getter @Setter @Many
-    Set <Author> authors = new HashSet <>();
+    private Set <Author> authors = new HashSet <>();
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -49,10 +49,10 @@ public class Book {
             inverseJoinColumns = { @JoinColumn(name = "id") }
     )
     @Getter @Setter @Many
-    Set <Genre> genres = new HashSet <>();
+    private Set <Genre> genres = new HashSet <>();
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "company_id")
     @Getter @Setter @One
-    PublishingCompany publishingCompany;
+    private PublishingCompany publishingCompany;
 }

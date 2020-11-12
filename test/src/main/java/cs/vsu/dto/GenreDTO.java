@@ -14,10 +14,10 @@ public class GenreDTO {
 
     @Getter
     @Setter
-    Integer id;
+    private Integer id;
     @Getter @Setter
-    String name;
+    private String name;
 
     @Getter @Setter @Many
-    Set <BookDTO> books = new HashSet <>();
+    private Set <BookDTO> books = new HashSet <>();
 }

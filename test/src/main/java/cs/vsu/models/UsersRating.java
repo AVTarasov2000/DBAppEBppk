@@ -16,27 +16,27 @@ public class UsersRating {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Setter
-    Integer id;
+    private Integer id;
     @Column(name = "book_id")
     @Getter @Setter
-    Integer bookId;
+    private Integer bookId;
     @Column(name = "user_id")
     @Getter @Setter
-    Integer userId;
+    private Integer userId;
     @Column(name = "rating")
     @Getter @Setter
-    Integer page;
+    private Integer page;
     @ManyToOne
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
     @Getter @Setter @One
-    Book books;
+    private Book books;
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     @Getter @Setter @One
-    User user;
+    private User user;
     @ManyToOne
     @JoinColumn(name = "rating", insertable = false, updatable = false)
     @Getter @Setter @One
-    Rating rating;
+    private Rating rating;
 
 }

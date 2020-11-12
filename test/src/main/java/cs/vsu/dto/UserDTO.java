@@ -13,14 +13,14 @@ import java.util.Set;
 public class UserDTO {
     @Getter
     @Setter
-    Integer id;
+    private Integer id;
     @Getter @Setter
-    String login;
+    private String login;
     @Getter @Setter
-    String password;
+    private String password;
     @Getter @Setter
-    String name;
+    private String name;
     @Getter @Setter @Many
-    Set <BookMarkDTO> bookMarks = new HashSet <>();
+    private Set <BookMarkDTO> bookMarks = new HashSet <>();
 
 }

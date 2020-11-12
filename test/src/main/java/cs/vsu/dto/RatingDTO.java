@@ -13,10 +13,10 @@ import java.util.Set;
 public class RatingDTO {
     @Getter
     @Setter
-    Integer id;
+    private Integer id;
     @Getter @Setter
-    String name;
+    private String name;
 
     @Getter @Setter @Many
-    Set <UsersRatingDTO> usersRatings = new HashSet <>();
+    private Set <UsersRatingDTO> usersRatings = new HashSet <>();
 }

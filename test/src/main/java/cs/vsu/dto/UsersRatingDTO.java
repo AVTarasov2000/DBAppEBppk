@@ -10,17 +10,17 @@ import lombok.Setter;
 public class UsersRatingDTO {
     @Getter
     @Setter
-    Integer id;
+    private Integer id;
     @Getter @Setter
-    Integer bookId;
+    private Integer bookId;
     @Getter @Setter
-    Integer userId;
+    private Integer userId;
     @Getter @Setter
-    Integer page;
+    private Integer page;
     @Getter @Setter @One
-    BookDTO books;
+    private BookDTO books;
     @Getter @Setter @One
-    UserDTO user;
+    private UserDTO user;
     @Getter @Setter @One
-    RatingDTO rating;
+    private RatingDTO rating;
 }
