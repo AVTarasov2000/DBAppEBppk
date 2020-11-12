@@ -21,12 +21,15 @@ public class DtoDaoConverter implements Converter{
         Object obj = dto.getClass().getAnnotation(DTODAO.class).targetClass().getDeclaredConstructor().newInstance();
         for (Field field :
                 dto.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
             if (field.isAnnotationPresent(One.class)) {
                 field.set(obj, convert(field.get(dto)));
             } else if (field.isAnnotationPresent(Many.class)) {
                 ((Set) field.get(obj)).add(convert(field.get(dto)));
             } else {
-                obj.getClass().getField(field.getName()).set(obj, field.get(dto));
+                Field targetField = obj.getClass().getDeclaredField(field.getName());
+                targetField.setAccessible(true);
+                targetField.set(obj, field.get(dto));
             }
         }
         return obj;
