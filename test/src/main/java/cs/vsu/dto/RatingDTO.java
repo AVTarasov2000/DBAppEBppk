@@ -5,6 +5,7 @@ import cs.vsu.models.Rating;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @DTO(targetClass = Rating.class)
@@ -16,5 +17,5 @@ public class RatingDTO {
     String name;
 
     @Getter @Setter
-    Set <UsersRatingDTO> usersRatings;
+    Set <UsersRatingDTO> usersRatings = new HashSet <>();
 }

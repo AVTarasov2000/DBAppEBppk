@@ -5,6 +5,7 @@ import cs.vsu.models.PublishingCompany;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @DTO(targetClass = PublishingCompany.class)
@@ -16,5 +17,5 @@ public class PublishingCompanyDTO {
     String name;
 
     @Getter @Setter
-    Set <BookDTO> books;
+    Set <BookDTO> books = new HashSet <>();
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,5 +23,5 @@ public class PublishingCompany {
     @OneToMany
     @JoinColumn(name = "company_id")
     @Getter @Setter
-    Set <Book> books;
+    Set <Book> books = new HashSet <>();
 }

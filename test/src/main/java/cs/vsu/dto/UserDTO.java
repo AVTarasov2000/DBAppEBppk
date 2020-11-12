@@ -5,6 +5,7 @@ import cs.vsu.models.User;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @DTO(targetClass = User.class)
@@ -19,6 +20,6 @@ public class UserDTO {
     @Getter @Setter
     String name;
     @Getter @Setter
-    Set <BookMarkDTO> bookMarks;
+    Set <BookMarkDTO> bookMarks = new HashSet <>();
 
 }
