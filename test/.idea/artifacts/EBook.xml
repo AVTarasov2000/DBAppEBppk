@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="EBook">
+    <output-path>$PROJECT_DIR$/out/artifacts/EBook</output-path>
+    <root id="archive" name="EBook.war" />
+  </artifact>
+</component>
