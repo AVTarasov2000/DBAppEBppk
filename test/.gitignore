@@ -73,4 +73,5 @@ fabric.properties
 .gitignore
 src/test/
 target/
-/src/main/webapp/resourses/bootstrap-4.0.0-dist/
+/src/main/webapp/resources/bootstrap-4.0.0-dist/
+/src/main/webapp/resources/bootstrap-icons-1.1.0/
