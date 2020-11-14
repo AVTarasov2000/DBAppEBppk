@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -7,18 +7,11 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Signin Template · Bootstrap</title>
-<%--    <link href="<c:url value="/resourses/bootstrap-4.0.0-dist/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css"/>--%>
-<%--    <link href="<c:url value="/resourses/signin.css"/>" rel="stylesheet" type="text/css"/>--%>
-
-
-    <!-- Bootstrap core CSS -->
-<%--    <link href="resourses/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">--%>
-
+    <title>EBook-Sign in</title>
+    <link href="<c:url value="/resources/signin.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="/resources/bootstrap-4.0.0-dist/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css"/>
 
     <style>
-        <%@include file="/resourses/bootstrap-4.0.0-dist/css/bootstrap.min.css"%>
-        <%@include file="/resourses/signin.css"%>
 
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -35,19 +28,26 @@
             }
         }
     </style>
-<%--    <link href="resourses/signin.css" rel="stylesheet">--%>
 </head>
 <body class="text-center">
-<form class="form-signin">
-<%--    <img class="mb-4" src="resourses/bootstrap-icons-1.1.0/book.svg" alt="" width="72" height="72">--%>
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <c:url value="/signin" var="url"/>
+    <form class="form-signin" action="${url}" method="post">
+        <img class="mb-4" src="<c:url value="/resources/bootstrap-icons-1.1.0/book.svg"/>" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
-</form>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input name="login" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+        <label for="inputNameInSystem" class="sr-only">name in system</label>
+        <input name="name" type="text" id="inputNameInSystem" class="form-control" placeholder="name in system" required>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+<%--        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>--%>
+
+        <p class="mt-5 mb-3 text-muted">&copy; ${test}</p>
+    </form>
 </body>
 </html>
