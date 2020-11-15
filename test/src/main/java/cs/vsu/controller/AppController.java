@@ -6,11 +6,13 @@ import cs.vsu.services.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class AppController {
@@ -25,15 +27,36 @@ public class AppController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/signin", method = RequestMethod.POST)
+    @RequestMapping(value = "/signin", method = {RequestMethod.POST})
     public ModelAndView signInCheck(@ModelAttribute("user") UserDTO userDTO) {
+        return toMain(userDTO);
+    }
+
+    @RequestMapping(value = "/main/{login}/{password}", method = {RequestMethod.GET})
+    public ModelAndView goToMain(@PathVariable("login") String login, @PathVariable("password")String password) {
+        UserDTO tmp = new UserDTO();
+        tmp.setLogin(login);
+        tmp.setPassword(password);
+        return toMain(tmp);
+    }
+
+
+
+
+
+
+
+    private ModelAndView toMain(UserDTO userDTO){
         UserDTO user = service.getUser(userDTO);
-        if(user != null && userDTO.getPassword().equals(user.getPassword())) {
+        if(user != null) {
             List <BookDTO> books = service.getAllBooks(user);
+//            Set <BookDTO> books = user.getBooks();
 
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("main");
             modelAndView.addObject("name", user.getName());
+            modelAndView.addObject("login", user.getLogin());
+            modelAndView.addObject("password", user.getPassword());
             modelAndView.addObject("books", books);
 
             return modelAndView;
@@ -45,6 +68,7 @@ public class AppController {
             return modelAndView;
         }
     }
+
 
 
     //setters---------------------------------------------------------------------

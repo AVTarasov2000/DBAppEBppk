@@ -21,6 +21,6 @@ public class UserDTO {
     @Getter @Setter
     private String name;
     @Getter @Setter @Many
-    private Set <BookMarkDTO> bookMarks = new HashSet <>();
+    private Set <BookDTO> books = new HashSet <>();
 
 }

@@ -10,7 +10,15 @@
     <title>EBook-Sign in</title>
     <link href="<c:url value="/resources/signin.css"/>" rel="stylesheet" type="text/css"/>
     <link href="<c:url value="/resources/bootstrap-4.0.0-dist/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css"/>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="<c:url value="/resources/carhartl-jquery-cookie-92b7715/jquery.cookie.js"/>"></script>
+    <script>
+        function setCookie() {
+            $.cookie("login", $('input[name="login"]').val(), { expires: 7 });
+            $.cookie("password", $('input[name="password"]').val() , { expires: 7 });
+        }
+        $('#signin').on('click', () => setCookie());
+    </script>
     <style>
 
         .bd-placeholder-img {
@@ -42,7 +50,7 @@
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 
         <label for="inputLogin" class="sr-only">login</label>
-        <input name="login" type="login" id="inputLogin" class="form-control" placeholder="Email address" required autofocus>
+        <input name="login" type="text" id="inputLogin" class="form-control" placeholder="Email address" required autofocus>
 
         <label for="inputPassword" class="sr-only">Password</label>
         <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
@@ -50,7 +58,7 @@
 <%--        <label for="inputNameInSystem" class="sr-only">name in system</label>--%>
 <%--        <input name="name" type="text" id="inputNameInSystem" class="form-control" placeholder="name in system" required>--%>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="$.cookie('login', '$('#login')', { expires: 7 }); $.cookie('password', '$('#password')', { expires: 7 });">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="setCookie()">Sign in</button>
 <%--        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>--%>
 
         <p class="mt-5 mb-3 text-muted">&copy; 2020</p>

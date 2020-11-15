@@ -37,13 +37,11 @@
 <header>
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container d-flex justify-content-between">
-            <a href="#" class="navbar-brand d-flex align-items-center">
-                <strong>${name}</strong>
-                <img class="mb-4" src="<c:url value="/resources/bootstrap-icons-1.1.0/book.svg"/>" alt="" width="20" height="20">
-            </a>
+            <img class="mb-4" src="<c:url value="/resources/bootstrap-icons-1.1.0/book.svg"/>" alt="" width="20" height="20">
         </div>
     </div>
 </header>
+<jsp:include page="navbar.jsp"/>
 
 <main role="main">
     <table class="table table-inverse">

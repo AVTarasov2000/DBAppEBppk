@@ -31,8 +31,8 @@ public class BookMark {
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
     @Getter @Setter @One
     private Book books;
-    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    @Getter @Setter @One
-    private User user;
+//    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+//    @Getter @Setter @One
+//    private User user;
 }

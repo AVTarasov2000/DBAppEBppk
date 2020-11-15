@@ -27,7 +27,6 @@ public class DtoDaoConverter implements Converter{
                 targetField.setAccessible(true);
                 targetField.set(obj, convert(field.get(dto)));
             } else if (field.isAnnotationPresent(Many.class)) {
-                // TODO: 15/11/2020  use, when find, how to get set from db
                 Field targetField = obj.getClass().getDeclaredField(field.getName());
                 targetField.setAccessible(true);
                 for (Object o : ((Set) field.get(dto))) {

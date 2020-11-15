@@ -30,9 +30,14 @@ public class User {
     @Column(name = "name")
     @Getter @Setter
     private String name;
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "library.book_mark",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "id") }
+    )
+//    @JoinColumn(name = "id")
     @Getter @Setter @Many
-    private Set <BookMark> bookMarks = new HashSet <>();
+    private Set <Book> books = new HashSet <>();
 
 }

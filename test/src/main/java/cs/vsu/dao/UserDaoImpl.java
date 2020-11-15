@@ -24,8 +24,9 @@ public class UserDaoImpl implements UserDao{
     @Override
     public boolean checkUser(User user) {
         Session session = sessionFactory.openSession();
-        Query<User> query = session.createQuery("FROM User FETCH ALL PROPERTIES WHERE login=:login");
+        Query<User> query = session.createQuery("FROM User FETCH ALL PROPERTIES WHERE login=:login and password=:password");
         query.setParameter("login",user.getLogin());
+        query.setParameter("password",user.getPassword());
         List <User> res = query.getResultList();
         session.close();
         return res.size()>0;
@@ -33,8 +34,9 @@ public class UserDaoImpl implements UserDao{
 
     public User getUser(User user){
         Session session = sessionFactory.openSession();
-        Query<User> query = session.createQuery("FROM User FETCH ALL PROPERTIES WHERE login=:login");
+        Query<User> query = session.createQuery("FROM User FETCH ALL PROPERTIES WHERE login=:login and password=:password");
         query.setParameter("login",user.getLogin());
+        query.setParameter("password",user.getPassword());
         List <User> res = query.getResultList();
         session.close();
         if (res.size()>0)
