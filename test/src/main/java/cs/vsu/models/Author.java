@@ -23,12 +23,12 @@ public class Author {
     @Column(name = "name")
     @Getter @Setter
     private String name;
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "book_author",
-            joinColumns = { @JoinColumn(name = "author_id") },
-            inverseJoinColumns = { @JoinColumn(name = "id") }
-    )
-    @Getter @Setter @Many
-    private Set <Book> books = new HashSet <>();;
+//    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "library.book_author",
+//            joinColumns = { @JoinColumn(name = "author_id") },
+//            inverseJoinColumns = { @JoinColumn(name = "id") }
+//    )
+//    @Getter @Setter @Many
+//    private Set <Book> books = new HashSet <>();;
 }

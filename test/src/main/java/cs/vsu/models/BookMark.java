@@ -27,11 +27,11 @@ public class BookMark {
     @Column(name = "page")
     @Getter @Setter
     private Integer page;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
     @Getter @Setter @One
     private Book books;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     @Getter @Setter @One
     private User user;

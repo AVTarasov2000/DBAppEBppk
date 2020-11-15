@@ -1,7 +1,12 @@
 package cs.vsu.services;
 
+import cs.vsu.dao.BookMarkDao;
 import cs.vsu.dao.Dao;
+import cs.vsu.dao.UserDao;
 import cs.vsu.dto.AuthorDTO;
+import cs.vsu.dto.BookDTO;
+import cs.vsu.dto.BookMarkDTO;
+import cs.vsu.dto.UserDTO;
 import cs.vsu.models.*;
 import cs.vsu.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +20,11 @@ public class AppServiceImpl implements AppService {
 
     private Dao<Author> authorDao;
     private Dao<Book> bookDao;
-    private Dao<BookMark> bookMarkDao;
     private Dao<Genre> genreDao;
     private Dao<PublishingCompany> publishingCompanyDao;
     private Dao<Rating> ratingDao;
-    private Dao<User> userDao;
+    private UserDao userDao;
+    private BookMarkDao bookMarkDao;
     private Dao<UsersRating> usersRatingDao;
     private Converter converter;
 
@@ -30,13 +35,29 @@ public class AppServiceImpl implements AppService {
         return res;
     }
 
+    @Override
+    public boolean isExist(UserDTO user) {
+        return userDao.checkUser((User) converter.convert(user));
+    }
+    @Override
+    public UserDTO getUser(UserDTO user) {
+        User user1 = userDao.getUser((User) converter.convert(user));
+        if (user1 == null){
+            return null;
+        }
+        else {
+            return (UserDTO) converter.convert(user1);
+        }
+    }
 
-
-
-
-
-
-
+    @Override
+    public List <BookDTO> getAllBooks(UserDTO user) {
+        List<BookDTO> res = new ArrayList <>();
+        List<Book> lst = bookMarkDao.getUsersBooks((User) converter.convert(user));
+        lst.forEach( a -> res.add((BookDTO) converter.convert(a)));
+//        bookMarkDao.getAll(BookMark.class).forEach( a -> res.add((BookMarkDTO) converter.convert(a)));
+        return res;
+    }
 
     ///setters--------------------------------------------------------------------------------
     @Autowired
@@ -54,7 +75,7 @@ public class AppServiceImpl implements AppService {
     }
 
     @Autowired
-    public void setBookMarkDao(Dao <BookMark> bookMarkDao) {
+    public void setBookMarkDao(BookMarkDao bookMarkDao) {
         this.bookMarkDao = bookMarkDao;
     }
 
@@ -74,7 +95,7 @@ public class AppServiceImpl implements AppService {
     }
 
     @Autowired
-    public void setUserDao(Dao <User> userDao) {
+    public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
 

@@ -25,7 +25,7 @@ public class DaoImpl<T> implements Dao<T> {
     @Transactional
     public T findById(Integer id, Class<T> tClass) {
         Session session = sessionFactory.openSession();
-        T res = sessionFactory.getCurrentSession().get(tClass, id);
+        T res = session.get(tClass, id);
         session.close();
         return res;
     }
@@ -66,6 +66,15 @@ public class DaoImpl<T> implements Dao<T> {
         Session session = sessionFactory.openSession();
         String table = tClass.getName();
         List<T> res = session.createQuery("FROM "+table, tClass).getResultList();
+        session.close();
+        return res;
+    }
+
+    @Override
+    public List <T> getByField(Class <T> tClass, String column, String value) {
+        Session session = sessionFactory.openSession();
+        String table = tClass.getName();
+        List<T> res = session.createQuery("FROM "+table+" WHERE "+column+"="+value, tClass).getResultList();
         session.close();
         return res;
     }

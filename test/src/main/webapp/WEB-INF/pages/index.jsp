@@ -30,24 +30,30 @@
     </style>
 </head>
 <body class="text-center">
+
     <c:url value="/signin" var="url"/>
     <form class="form-signin" action="${url}" method="post">
+        <c:if test="${alert}">
+            <div class="alert alert-dark text-center" role="alert" >
+                    ${warning}
+            </div>
+        </c:if>
         <img class="mb-4" src="<c:url value="/resources/bootstrap-icons-1.1.0/book.svg"/>" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input name="login" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputLogin" class="sr-only">login</label>
+        <input name="login" type="login" id="inputLogin" class="form-control" placeholder="Email address" required autofocus>
 
         <label for="inputPassword" class="sr-only">Password</label>
         <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
-        <label for="inputNameInSystem" class="sr-only">name in system</label>
-        <input name="name" type="text" id="inputNameInSystem" class="form-control" placeholder="name in system" required>
+<%--        <label for="inputNameInSystem" class="sr-only">name in system</label>--%>
+<%--        <input name="name" type="text" id="inputNameInSystem" class="form-control" placeholder="name in system" required>--%>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="$.cookie('login', '$('#login')', { expires: 7 }); $.cookie('password', '$('#password')', { expires: 7 });">Sign in</button>
 <%--        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>--%>
 
-        <p class="mt-5 mb-3 text-muted">&copy; ${test}</p>
+        <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
     </form>
 </body>
 </html>

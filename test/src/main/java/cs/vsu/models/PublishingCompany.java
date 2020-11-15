@@ -21,8 +21,8 @@ public class PublishingCompany {
     @Column(name = "name")
     @Getter @Setter
     private String name;
-    @OneToMany
-    @JoinColumn(name = "company_id")
-    @Getter @Setter @Many
-    private Set <Book> books = new HashSet <>();
+//    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "company_id")
+//    @Getter @Setter @Many
+//    private Set <Book> books = new HashSet <>();
 }

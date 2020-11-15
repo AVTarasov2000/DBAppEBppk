@@ -23,13 +23,13 @@ public class Genre {
     private String name;
 
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "book_genre",
-            joinColumns = { @JoinColumn(name = "book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "id") }
-    )
-    @Getter @Setter @Many
-    private Set <Book> books = new HashSet <>();
+//    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+//    @JoinTable(
+//            name = "book_genre",
+//            joinColumns = { @JoinColumn(name = "book_id") },
+//            inverseJoinColumns = { @JoinColumn(name = "id") }
+//    )
+//    @Getter @Setter @Many
+//    private Set <Book> books = new HashSet <>();
 
 }

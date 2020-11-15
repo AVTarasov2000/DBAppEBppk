@@ -33,18 +33,18 @@ public class Book {
     @Getter @Setter
     private Integer companyId;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "book_author",
+            name = "library.book_author",
             joinColumns = { @JoinColumn(name = "book_id") },
             inverseJoinColumns = { @JoinColumn(name = "id") }
     )
     @Getter @Setter @Many
     private Set <Author> authors = new HashSet <>();
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "book_genre",
+            name = "library.book_genre",
             joinColumns = { @JoinColumn(name = "book_id") },
             inverseJoinColumns = { @JoinColumn(name = "id") }
     )

@@ -30,7 +30,7 @@ public class User {
     @Column(name = "name")
     @Getter @Setter
     private String name;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     @Getter @Setter @Many
     private Set <BookMark> bookMarks = new HashSet <>();
