@@ -23,8 +23,8 @@
                 <form action="${updateUrl}" method="post" class="form-inline">
                     <input type="hidden" name="login" value="${login}">
                     <input type="hidden" name="password" value="${password}">
-                    <label for="newAuthor" class="sr-only">author</label>
-                    <input type="text" name="author" id="newAuthor" class="form-group mb-2 form-control" height="30px">
+                    <label for="author" class="sr-only">author</label>
+                    <input type="text" name="authorName" id="newAuthor" class="form-group mb-2 form-control" height="30px">
                     <button class="btn btn-primary mb-2" type="submit" >add</button>
                 </form>
             </div>

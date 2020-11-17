@@ -14,4 +14,10 @@ public interface AppService {
     void addAuthor(AuthorDTO authorDTO);
     void deleteAuthor(AuthorDTO authorDTO);
     void updateAuthor(AuthorDTO authorDTO);
+    void addCompany(PublishingCompanyDTO publishingCompanyDTO);
+    void deleteCompany(PublishingCompanyDTO publishingCompanyDTO);
+    void updateCompany(PublishingCompanyDTO publishingCompanyDTO);
+    void addGenre(GenreDTO genreDTO);
+    void deleteGenre(GenreDTO genreDTO);
+    void updateGenre(GenreDTO genreDTO);
 }

@@ -23,7 +23,7 @@
                     <input type="hidden" name="login" value="${login}">
                     <input type="hidden" name="password" value="${password}">
                     <label for="newGenre" class="sr-only">login</label>
-                    <input type="text" name="author" id="newGenre" class="form-group mb-2 form-control" height="30px">
+                    <input type="text" name="genreName" id="newGenre" class="form-group mb-2 form-control" height="30px">
                     <button class="btn btn-primary mb-2" type="submit" >add</button>
                 </form>
             </div>
@@ -48,9 +48,9 @@
                     <form action="${updateUrl}" method="post" class="form-inline">
                         <input type="hidden" name="login" value="${login}">
                         <input type="hidden" name="password" value="${password}">
-                        <input type="hidden" name="prewName" value="${genres}">
-                        <label for="author" class="sr-only">login</label>
-                        <input type="text" name="author" id="author" class="form-group mb-2 form-control" height="30px">
+                        <input type="hidden" name="genreId" value="${genre.id}">
+                        <label for="genreName" class="sr-only">login</label>
+                        <input type="text" name="genreName" id="genreName" class="form-group mb-2 form-control" height="30px">
                         <button class="btn btn-primary mb-2" type="submit" >update</button>
                     </form>
                 </td>
@@ -59,7 +59,7 @@
                     <form action="${updateUrl}" method="post" class="form-inline">
                         <input type="hidden" name="login" value="${login}">
                         <input type="hidden" name="password" value="${password}">
-                        <input type="hidden" name="author" value="${genres}">
+                        <input type="hidden" name="genreId" value="${genre.id}">
                         <button class="btn btn-primary mb-2" type="submit" >delete</button>
                     </form>
                 </td>

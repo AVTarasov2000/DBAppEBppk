@@ -42,6 +42,30 @@ public class AppServiceImpl implements AppService {
         authorDao.update((Author) converter.convert(authorDTO));
     }
 
+    public void addCompany(PublishingCompanyDTO publishingCompanyDTO){
+        publishingCompanyDao.save((PublishingCompany) converter.convert(publishingCompanyDTO));
+    }
+
+    public void deleteCompany(PublishingCompanyDTO publishingCompanyDTO){
+        publishingCompanyDao.delete((PublishingCompany) converter.convert(publishingCompanyDTO));
+    }
+
+    public void updateCompany(PublishingCompanyDTO publishingCompanyDTO){
+        publishingCompanyDao.update((PublishingCompany) converter.convert(publishingCompanyDTO));
+    }
+
+    public void addGenre(GenreDTO genreDTO){
+        genreDao.save((Genre) converter.convert(genreDTO));
+    }
+
+    public void deleteGenre(GenreDTO genreDTO){
+        genreDao.delete((Genre) converter.convert(genreDTO));
+    }
+
+    public void updateGenre(GenreDTO genreDTO){
+        genreDao.update((Genre) converter.convert(genreDTO));
+    }
+
     @Override
     public UserDTO getUser(UserDTO user) {
         User user1 = userDao.getUser((User) converter.convert(user));
