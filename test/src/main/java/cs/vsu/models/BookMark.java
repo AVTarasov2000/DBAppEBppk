@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class BookMark {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
     private Integer id;

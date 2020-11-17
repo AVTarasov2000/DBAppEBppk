@@ -16,7 +16,7 @@ import java.util.Set;
 @DTODAO(targetClass = UserDTO.class)
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
     @Column(name = "id")

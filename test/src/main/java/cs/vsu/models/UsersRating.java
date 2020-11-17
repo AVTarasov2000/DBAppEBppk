@@ -13,7 +13,7 @@ import javax.persistence.*;
 @DTODAO(targetClass = UsersRatingDTO.class)
 public class UsersRating {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
     private Integer id;
