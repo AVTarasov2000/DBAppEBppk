@@ -1,7 +1,6 @@
 package cs.vsu.dao;
 
 import cs.vsu.models.Book;
-import cs.vsu.models.BookMark;
 import cs.vsu.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class BookMarkDaoImpl implements BookMarkDao {
+public class BookDaoImpl implements BookDao {
 
     private SessionFactory sessionFactory;
 

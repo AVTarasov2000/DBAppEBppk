@@ -4,9 +4,13 @@ package cs.vsu.dto;
 import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.One;
 import cs.vsu.models.BookMark;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @DTODAO(targetClass = BookMark.class)
 public class BookMarkDTO {
 
@@ -22,6 +26,6 @@ public class BookMarkDTO {
 
     @Getter @Setter @One
     private BookDTO books;
-    @Getter @Setter @One
-    private UserDTO user;
+//    @Getter @Setter @One
+//    private UserDTO user;
 }

@@ -5,6 +5,6 @@ import cs.vsu.models.User;
 
 import java.util.List;
 
-public interface BookMarkDao {
+public interface BookDao {
     List<Book> getUsersBooks(User user);
 }
