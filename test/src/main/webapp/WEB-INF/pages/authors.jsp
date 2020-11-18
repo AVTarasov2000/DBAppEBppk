@@ -43,13 +43,13 @@
         <tbody>
         <c:forEach items="${authors}" var="author">
             <tr>
-                <td>${author.name}</td>
+                <td>${author.authorName}</td>
                 <td>
                     <c:url value="/updateAuthor" var="updateUrl"/>
                     <form action="${updateUrl}" method="post" class="form-inline">
                         <input type="hidden" name="login" value="${login}">
                         <input type="hidden" name="password" value="${password}">
-                        <input type="hidden" name="authorId" value="${author.id}">
+                        <input type="hidden" name="authorId" value="${author.authorId}">
                         <label for="author" class="sr-only">login</label>
                         <input type="text" name="authorName" id="author" class="form-group mb-2 form-control" height="30px">
                         <button class="btn btn-primary mb-2" type="submit" >update</button>
@@ -60,8 +60,8 @@
                     <form action="${updateUrl}" method="post" class="form-inline">
                         <input type="hidden" name="login" value="${login}">
                         <input type="hidden" name="password" value="${password}">
-                        <input type="hidden" name="authorName" value="${author.name}">
-                        <input type="hidden" name="authorId" value="${author.id}">
+                        <input type="hidden" name="authorName" value="${author.authorName}">
+                        <input type="hidden" name="authorId" value="${author.authorId}">
                         <button class="btn btn-primary mb-2" type="submit" >delete</button>
                     </form>
                 </td>

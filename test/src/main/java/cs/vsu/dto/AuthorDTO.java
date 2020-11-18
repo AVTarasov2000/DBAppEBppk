@@ -16,9 +16,9 @@ import java.util.Set;
 public class AuthorDTO {
     @Getter
     @Setter
-    private Integer id;
+    private Integer authorId;
     @Getter @Setter
-    private String name;
+    private String authorName;
 //    @Getter @Setter @Many
 //    private Set <BookDTO> books = new HashSet <>();;
 }

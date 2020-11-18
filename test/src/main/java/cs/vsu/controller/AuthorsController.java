@@ -40,9 +40,9 @@ public class AuthorsController {
 
     @RequestMapping(value = "/addAuthor", method = {RequestMethod.POST})
     public ModelAndView addAuthor(@ModelAttribute("user") UserDTO userDTO,
-                                  @ModelAttribute("authorName") String authorName) {
+                                  @ModelAttribute("author") AuthorDTO authorDTO
+    ) {
         UserDTO user = service.getUser(userDTO);
-        AuthorDTO authorDTO = new AuthorDTO(null, authorName);
         if(user == null){
             return appController.signIn();
         }
@@ -52,10 +52,9 @@ public class AuthorsController {
 
     @RequestMapping(value = "/updateAuthor", method = {RequestMethod.POST})
     public ModelAndView updateAuthor(@ModelAttribute("user") UserDTO userDTO,
-                                     @ModelAttribute("authorName") String authorName,
-                                     @ModelAttribute("authorId") Integer authorId) {
+                                     @ModelAttribute("author") AuthorDTO authorDTO
+    ) {
         UserDTO user = service.getUser(userDTO);
-        AuthorDTO authorDTO = new AuthorDTO(authorId, authorName);
         if(user == null){
             return appController.signIn();
         }
@@ -66,10 +65,9 @@ public class AuthorsController {
 
     @RequestMapping(value = "/deleteAuthor", method = {RequestMethod.POST})
     public ModelAndView deleteAuthor(@ModelAttribute("user") UserDTO userDTO,
-                                     @ModelAttribute("authorName") String authorName,
-                                     @ModelAttribute("authorId") Integer authorId) {
+                                     @ModelAttribute("author") AuthorDTO authorDTO
+    ) {
         UserDTO user = service.getUser(userDTO);
-        AuthorDTO authorDTO = new AuthorDTO(authorId, authorName);
         if(user == null){
             return appController.signIn();
         }

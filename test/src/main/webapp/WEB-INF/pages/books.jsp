@@ -58,7 +58,7 @@
                 <td>${book.publishingCompany.name}</td>
                 <td>${book.releaseDate}</td>
                 <td>${book.linkToFile}</td>
-                <td><c:forEach items="${book.authors}" var="author">|${author.name}|</c:forEach> </td>
+                <td><c:forEach items="${book.authors}" var="author">|${author.authorName}|</c:forEach> </td>
                 <td><c:forEach items="${book.genres}" var="genre">|${genre.name}|</c:forEach> </td>
                 <td>
                     <c:url value="/updateAuthor" var="updateUrl"/>

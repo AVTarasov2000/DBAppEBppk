@@ -19,10 +19,11 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
-    private Integer id;
+    @Column(name = "id")
+    private Integer authorId;
     @Column(name = "name")
     @Getter @Setter
-    private String name;
+    private String authorName;
 //    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 //    @JoinTable(
 //            name = "library.book_author",
