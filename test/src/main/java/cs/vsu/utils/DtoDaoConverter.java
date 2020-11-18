@@ -14,28 +14,30 @@ import java.util.Set;
 public class DtoDaoConverter implements Converter{
 
     @SneakyThrows
-    public Object convert(Object dto) {
-        if (!dto.getClass().isAnnotationPresent(DTODAO.class)) {
+    public Object convert(Object input) {
+        if (input==null)
+            return null;
+        if (!input.getClass().isAnnotationPresent(DTODAO.class)) {
             throw new AnnotationTypeMismatchException(null, "no DTO annotation");
         }
-        Object obj = dto.getClass().getAnnotation(DTODAO.class).targetClass().getDeclaredConstructor().newInstance();
+        Object obj = input.getClass().getAnnotation(DTODAO.class).targetClass().getDeclaredConstructor().newInstance();
         for (Field field :
-                dto.getClass().getDeclaredFields()) {
+                input.getClass().getDeclaredFields()) {
             field.setAccessible(true);
             if (field.isAnnotationPresent(One.class)) {
                 Field targetField = obj.getClass().getDeclaredField(field.getName());
                 targetField.setAccessible(true);
-                targetField.set(obj, convert(field.get(dto)));
+                targetField.set(obj, convert(field.get(input)));
             } else if (field.isAnnotationPresent(Many.class)) {
                 Field targetField = obj.getClass().getDeclaredField(field.getName());
                 targetField.setAccessible(true);
-                for (Object o : ((Set) field.get(dto))) {
+                for (Object o : ((Set) field.get(input))) {
                     ((Set) targetField.get(obj)).add(convert(o));
                 }
             } else {
                 Field targetField = obj.getClass().getDeclaredField(field.getName());
                 targetField.setAccessible(true);
-                targetField.set(obj, field.get(dto));
+                targetField.set(obj, field.get(input));
             }
         }
         return obj;
