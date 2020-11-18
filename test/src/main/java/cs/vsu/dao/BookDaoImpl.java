@@ -22,10 +22,9 @@ public class BookDaoImpl implements BookDao {
 
 
     @Override
-    public List <Book> getUsersBooks(User user) {
+    public List <Book> getUsersBooks() {
         Session session = sessionFactory.openSession();
         Query <Book> query = session.createQuery("FROM Book FETCH ALL PROPERTIES ");
-//        query.setParameter("uId",user.getId());
         List <Book> res = query.getResultList();
         session.close();
         return res;

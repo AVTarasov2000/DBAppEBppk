@@ -8,7 +8,7 @@ public interface AppService {
     List <AuthorDTO> getAllAuthors();
     boolean isExist(UserDTO user);
     public UserDTO getUser(UserDTO user);
-    List<BookDTO> getAllBooks(UserDTO user);
+    List<BookDTO> getAllBooks();
     List<GenreDTO> getAllGenres();
     List<PublishingCompanyDTO> getAllCompanys();
     void addAuthor(AuthorDTO authorDTO);

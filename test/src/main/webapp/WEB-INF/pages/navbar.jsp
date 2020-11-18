@@ -50,6 +50,15 @@
                 </form>
                 <span class="sr-only">(current)</span>
             </li>
+            <li class="nav-item active navbarli">
+                <c:url value="/books" var="books_url"/>
+                <form method="post" action="${books_url}">
+                    <input type="hidden" name="login" value="${login}">
+                    <input type="hidden" name="password" value="${password}">
+                    <button class="btn btn-lg btn-block" type="submit">genres</button>
+                </form>
+                <span class="sr-only">(current)</span>
+            </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">

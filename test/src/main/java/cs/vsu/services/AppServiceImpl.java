@@ -99,9 +99,9 @@ public class AppServiceImpl implements AppService {
     }
 
     @Override
-    public List <BookDTO> getAllBooks(UserDTO user) {
+    public List <BookDTO> getAllBooks() {
         List<BookDTO> res = new ArrayList <>();
-        List<Book> lst = bookDao.getUsersBooks((User) converter.convert(user));
+        List<Book> lst = bookDao.getUsersBooks();
         lst.forEach( a -> res.add((BookDTO) converter.convert(a)));
 //        bookMarkDao.getAll(BookMark.class).forEach( a -> res.add((BookMarkDTO) converter.convert(a)));
         return res;
