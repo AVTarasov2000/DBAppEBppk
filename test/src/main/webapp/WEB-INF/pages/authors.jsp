@@ -43,7 +43,7 @@
         <tbody>
         <c:forEach items="${authors}" var="author">
             <tr>
-                <td>${author.authorName}</td>
+                <td><c:out value="${author.authorName}"/></td>
                 <td>
                     <c:url value="/updateAuthor" var="updateUrl"/>
                     <form action="${updateUrl}" method="post" class="form-inline">

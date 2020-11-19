@@ -42,7 +42,7 @@
         <tbody>
         <c:forEach items="${companys}" var="company">
             <tr>
-                <td>${company.name}</td>
+                <td><c:out value="${company.name}"/></td>
                 <td>
                     <c:url value="/updateCompany" var="updateUrl"/>
                     <form action="${updateUrl}" method="post" class="form-inline">

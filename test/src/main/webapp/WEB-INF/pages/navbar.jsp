@@ -55,7 +55,7 @@
                 <form method="post" action="${books_url}">
                     <input type="hidden" name="login" value="${login}">
                     <input type="hidden" name="password" value="${password}">
-                    <button class="btn btn-lg btn-block" type="submit">genres</button>
+                    <button class="btn btn-lg btn-block" type="submit">all books</button>
                 </form>
                 <span class="sr-only">(current)</span>
             </li>

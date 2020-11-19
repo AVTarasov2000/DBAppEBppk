@@ -42,7 +42,7 @@
         <tbody>
         <c:forEach items="${genres}" var="genre">
             <tr>
-                <td>${genre.name}</td>
+                <td><c:out value="${genre.name}"/></td>
                 <td>
                     <c:url value="/updateGenre" var="updateUrl"/>
                     <form action="${updateUrl}" method="post" class="form-inline">
