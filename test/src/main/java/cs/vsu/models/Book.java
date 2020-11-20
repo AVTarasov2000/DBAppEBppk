@@ -17,21 +17,22 @@ import java.util.Set;
 @DTODAO(targetClass = BookDTO.class)
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter @Setter
-    private Integer id;
+    @Column(name = "id", nullable = false, unique = true)
+    private Integer bookId;
     @Column(name = "name")
     @Getter @Setter
-    private String name;
+    private String bookName;
     @Column(name = "release_date")
     @Getter @Setter
-    private Date releaseDate;
+    private Date bookReleaseDate;
     @Column(name = "link_to_file")
     @Getter @Setter
-    private String linkToFile;
+    private String bookLinkToFile;
     @Column(name = "company_id", insertable = false, updatable = false)
     @Getter @Setter
-    private Integer companyId;
+    private Integer bookCompanyId;
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
@@ -51,7 +52,7 @@ public class Book {
     @Getter @Setter @Many
     private Set <Genre> genres = new HashSet <>();
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id")
     @Getter @Setter @One
     private PublishingCompany publishingCompany;

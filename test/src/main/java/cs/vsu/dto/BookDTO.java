@@ -20,15 +20,15 @@ public class BookDTO {
 
     @Getter
     @Setter
-    private Integer id;
+    private Integer bookId;
     @Getter @Setter
-    private String name;
+    private String bookName;
     @Getter @Setter
-    private Date releaseDate;
+    private Date bookReleaseDate;
     @Getter @Setter
-    private String linkToFile;
+    private String bookLinkToFile;
     @Getter @Setter
-    private Integer companyId;
+    private Integer bookCompanyId;
     @Getter @Setter @Many
     private Set <AuthorDTO> authors = new HashSet <>();
     @Getter @Setter @Many

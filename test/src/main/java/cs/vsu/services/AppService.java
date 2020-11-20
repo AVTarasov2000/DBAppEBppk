@@ -20,4 +20,6 @@ public interface AppService {
     void addGenre(GenreDTO genreDTO);
     void deleteGenre(GenreDTO genreDTO);
     void updateGenre(GenreDTO genreDTO);
+    void addBook(BookDTO bookDTO);
+    void deleteBook(BookDTO bookDTO);
 }

@@ -16,7 +16,9 @@ import java.util.List;
 public class AppServiceImpl implements AppService {
 
     private Dao<Author> authorDao;
-//    private Dao<Book> bookDao;
+
+
+    private Dao<Book> simpleBookDao;
     private Dao<Genre> genreDao;
     private Dao<PublishingCompany> publishingCompanyDao;
     private Dao<Rating> ratingDao;
@@ -30,6 +32,8 @@ public class AppServiceImpl implements AppService {
         return userDao.checkUser((User) converter.convert(user));
     }
 
+
+
     public void addAuthor(AuthorDTO authorDTO){
         authorDao.save((Author) converter.convert(authorDTO));
     }
@@ -41,6 +45,8 @@ public class AppServiceImpl implements AppService {
     public void updateAuthor(AuthorDTO authorDTO){
         authorDao.update((Author) converter.convert(authorDTO));
     }
+
+
 
     public void addCompany(PublishingCompanyDTO publishingCompanyDTO){
         publishingCompanyDao.save((PublishingCompany) converter.convert(publishingCompanyDTO));
@@ -54,6 +60,9 @@ public class AppServiceImpl implements AppService {
         publishingCompanyDao.update((PublishingCompany) converter.convert(publishingCompanyDTO));
     }
 
+
+
+
     public void addGenre(GenreDTO genreDTO){
         genreDao.save((Genre) converter.convert(genreDTO));
     }
@@ -64,6 +73,15 @@ public class AppServiceImpl implements AppService {
 
     public void updateGenre(GenreDTO genreDTO){
         genreDao.update((Genre) converter.convert(genreDTO));
+    }
+
+    @Override
+    public void addBook(BookDTO bookDTO) {
+        bookDao.addBook((Book) converter.convert(bookDTO));
+    }
+
+    public void deleteBook(BookDTO bookDTO){
+        simpleBookDao.delete((Book) converter.convert(bookDTO));
     }
 
     @Override
@@ -108,6 +126,11 @@ public class AppServiceImpl implements AppService {
     }
 
     ///setters--------------------------------------------------------------------------------
+    @Autowired
+    public void setSimpleBookDao(Dao <Book> simpleBookDao) {
+        this.simpleBookDao = simpleBookDao;
+    }
+
     @Autowired
     public void setConverter(Converter converter) {
         this.converter = converter;
