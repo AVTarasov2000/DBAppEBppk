@@ -19,6 +19,6 @@ public class AuthorDTO {
     private Integer authorId;
     @Getter @Setter
     private String authorName;
-//    @Getter @Setter @Many
-//    private Set <BookDTO> books = new HashSet <>();;
+    @Getter @Setter @Many
+    private Set <BookDTO> books = new HashSet <>();
 }

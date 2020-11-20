@@ -22,6 +22,6 @@ public class GenreDTO {
     @Getter @Setter
     private String name;
 
-//    @Getter @Setter @Many
-//    private Set <BookDTO> books = new HashSet <>();
+    @Getter @Setter @Many
+    private Set <BookDTO> books = new HashSet <>();
 }

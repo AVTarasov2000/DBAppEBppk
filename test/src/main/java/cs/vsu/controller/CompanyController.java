@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -32,7 +33,7 @@ public class CompanyController {
     public ModelAndView addCompany(@ModelAttribute("user") UserDTO userDTO,
                                    @ModelAttribute("companyName") String companyName) {
         UserDTO user = service.getUser(userDTO);
-        PublishingCompanyDTO publishingCompanyDTO = new PublishingCompanyDTO(null, companyName);
+        PublishingCompanyDTO publishingCompanyDTO = new PublishingCompanyDTO(null, companyName, new HashSet <>());
         if(user == null){
             return appController.signIn();
         }
@@ -45,7 +46,7 @@ public class CompanyController {
                                       @ModelAttribute("companyName") String companyName,
                                       @ModelAttribute("companyId") Integer companyId) {
         UserDTO user = service.getUser(userDTO);
-        PublishingCompanyDTO publishingCompanyDTO = new PublishingCompanyDTO(companyId, companyName);
+        PublishingCompanyDTO publishingCompanyDTO = new PublishingCompanyDTO(companyId, companyName, new HashSet <>());
         if(user == null){
             return appController.signIn();
         }
@@ -58,7 +59,7 @@ public class CompanyController {
                                       @ModelAttribute("companyName") String companyName,
                                       @ModelAttribute("companyId") Integer companyId) {
         UserDTO user = service.getUser(userDTO);
-        PublishingCompanyDTO publishingCompanyDTO = new PublishingCompanyDTO(companyId, companyName);
+        PublishingCompanyDTO publishingCompanyDTO = new PublishingCompanyDTO(companyId, companyName, new HashSet <>());
         if(user == null){
             return appController.signIn();
         }

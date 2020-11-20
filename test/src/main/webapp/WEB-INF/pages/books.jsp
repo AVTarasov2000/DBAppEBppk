@@ -9,17 +9,15 @@
     <meta name="description" content="">
     <meta name="generator" content="Jekyll v4.1.1">
     <link href="<c:url value="/resources/main.css"/>" rel="stylesheet">
-    <script src="<c:url value="/resources/jquery-3.5.1.min.js"/>"></script>
     <link href="<c:url value="/resources/bootstrap-4.0.0-dist/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css"/>
-    <script src="<c:url value="/resources/bootstrap-4.0.0-dist/js/bootstrap.min.js"/>"></script>
-
+    <script src="<c:url value="/resources/jquery-3.5.1.min.js"/>"></script>
+    <script src="<c:url value="/resources/bootstrap-4.0.0-dist/js/bootstrap.bundle.min.js"/>"></script>
+    <link href="<c:url value="/resources/bootstrap-multiselect-master/dist/css/bootstrap-multiselect.min.css"/>" rel="stylesheet" type="text/css"/>
+    <script src="<c:url value="/resources/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.min.js"/>"></script>
 <%--    todo make select good--%>
 
 
     <script>
-        $(document).ready(function() {
-            $('#authorId').multiselect();
-        });
 
     </script>
 </head>
@@ -45,24 +43,26 @@
 
                     <label for="bookCompanyId" class="sr-only">company</label>
 <%--                    <input type="text" name="bookCompanyId" id="bookCompanyId" class="form-group mb-2 form-control" height="30px">--%>
-                    <select class="form-group form-control" name="bookCompanyId" id="bookCompanyId">
+                    <select class="form-group form-control" name="company" id="bookCompanyId">
                         <option value=""></option>
                         <c:forEach items="${companys}" var="company">
-                            <option value="${company.id}">${company.name}</option>
+                            <option value="${company.id}:${company.name}"><c:out value="${company.name}"/></option>
                         </c:forEach>
                     </select>
 
-                    <select class="form-group form-control" name="authorId" id="authorId">
+                    <label for="authorId"></label>
+                    <select class="form-group form-control" name="author" id="authorId">
                         <option value=""></option>
                         <c:forEach items="${authors}" var="author">
-                            <option value="${author.authorId}">${author.authorName}</option>
+                            <option value="${author.authorId}:${author.authorName}"><c:out value="${author.authorName}"/></option>
                         </c:forEach>
                     </select>
 
-                    <select class="form-group form-control" name="authorId" id="genreId">
+                    <label for="genreId"></label>
+                    <select class="form-group form-control" name="genre" id="genreId">
                     <option value=""></option>
                         <c:forEach items="${genres}" var="genre">
-                            <option value="${genre.id}">${genre.name}</option>
+                            <option value="${genre.id}:${genre.name}"><c:out value="${genre.name}"/></option>
                         </c:forEach>
                     </select>
 
@@ -103,7 +103,7 @@
                 <td><c:forEach items="${book.authors}" var="author">|<c:out value="${author.authorName}"/>|</c:forEach> </td>
                 <td><c:forEach items="${book.genres}" var="genre">|<c:out value="${genre.name}"/>|</c:forEach> </td>
 <%--                <td>--%>
-<%--                    <c:url value="/updateAuthor" var="updateUrl"/>--%>
+<%--                    <c:url value="/updateBooks" var="updateUrl"/>--%>
 <%--                    <form action="${updateUrl}" method="post" class="form-inline">--%>
 <%--                        <input type="hidden" name="login" value="${login}">--%>
 <%--                        <input type="hidden" name="password" value="${password}">--%>
@@ -113,16 +113,18 @@
 <%--                        <button class="btn btn-primary mb-2" type="submit" >update</button>--%>
 <%--                    </form>--%>
 <%--                </td>--%>
-<%--                <td>--%>
-<%--                    <c:url value="/deleteAuthor" var="updateUrl"/>--%>
-<%--                    <form action="${updateUrl}" method="post" class="form-inline">--%>
-<%--                        <input type="hidden" name="login" value="${login}">--%>
-<%--                        <input type="hidden" name="password" value="${password}">--%>
-<%--                        <input type="hidden" name="bookName" value="${book.bookName}">--%>
-<%--                        <input type="hidden" name="bookId" value="${book.bookId}">--%>
-<%--                        <button class="btn btn-primary mb-2" type="submit" >delete</button>--%>
-<%--                    </form>--%>
-<%--                </td>--%>
+                <td>
+                    <c:url value="/deleteBook" var="updateUrl"/>
+                    <form action="${updateUrl}" method="post" class="form-inline">
+                        <input type="hidden" name="login" value="${login}">
+                        <input type="hidden" name="password" value="${password}">
+                        <input type="hidden" name="bookName" value="${book.bookName}">
+                        <input type="hidden" name="bookId" value="${book.bookId}">
+                        <input type="hidden" name="bookCompanyId" value="${book.bookCompanyId}">
+                        <input type="hidden" name="bookLinkToFile" value="${book.bookLinkToFile}">
+                        <button class="btn btn-primary mb-2" type="submit" >delete</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
@@ -136,7 +138,6 @@
         </p>
     </div>
 </footer>
-<script src="<c:url value="/resources/jquery-3.5.1.min.js"/>" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="<c:url value="/resources/jquery-3.5.1.min.js"/>"><\/script>')</script><script src="<c:url value="/resources/bootstrap-4.0.0-dist/js/bootstrap.bundle.min.js"/>"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -32,7 +33,7 @@ public class GenreController {
     public ModelAndView addGenre(@ModelAttribute("user") UserDTO userDTO,
                                  @ModelAttribute("genreName") String genreName) {
         UserDTO user = service.getUser(userDTO);
-        GenreDTO genreDTO = new GenreDTO(null, genreName);
+        GenreDTO genreDTO = new GenreDTO(null, genreName, new HashSet <>());
         if(user == null){
             return appController.signIn();
         }
@@ -45,7 +46,7 @@ public class GenreController {
                                     @ModelAttribute("genreName") String genreName,
                                     @ModelAttribute("genreId") Integer genreId) {
         UserDTO user = service.getUser(userDTO);
-        GenreDTO genreDTO = new GenreDTO(genreId,genreName);
+        GenreDTO genreDTO = new GenreDTO(genreId,genreName, new HashSet <>());
         if(user == null){
             return appController.signIn();
         }
@@ -59,7 +60,7 @@ public class GenreController {
                                     @ModelAttribute("genreName") String genreName,
                                     @ModelAttribute("genreId") Integer genreId) {
         UserDTO user = service.getUser(userDTO);
-        GenreDTO genreDTO = new GenreDTO(genreId,genreName);
+        GenreDTO genreDTO = new GenreDTO(genreId,genreName, new HashSet <>());
         if(user == null){
             return appController.signIn();
         }

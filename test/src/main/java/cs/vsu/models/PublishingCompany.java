@@ -15,14 +15,15 @@ import java.util.Set;
 @DTODAO(targetClass = PublishingCompanyDTO.class)
 public class PublishingCompany {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter @Setter
+    @Column(name = "id", nullable = false, unique = true)
     private Integer id;
     @Column(name = "name")
     @Getter @Setter
     private String name;
-//    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "company_id")
-//    @Getter @Setter @Many
-//    private Set <Book> books = new HashSet <>();
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    @Getter @Setter @Many
+    private Set <Book> books = new HashSet <>();
 }

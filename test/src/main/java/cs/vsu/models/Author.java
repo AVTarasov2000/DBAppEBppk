@@ -17,19 +17,19 @@ import java.util.Set;
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter @Setter
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, unique = true)
     private Integer authorId;
     @Column(name = "name")
     @Getter @Setter
     private String authorName;
-//    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "library.book_author",
-//            joinColumns = { @JoinColumn(name = "author_id") },
-//            inverseJoinColumns = { @JoinColumn(name = "id") }
-//    )
-//    @Getter @Setter @Many
-//    private Set <Book> books = new HashSet <>();;
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "library.book_author",
+            joinColumns = { @JoinColumn(name = "author_id") },
+            inverseJoinColumns = { @JoinColumn(name = "id") }
+    )
+    @Getter @Setter @Many
+    private Set <Book> books = new HashSet <>();;
 }

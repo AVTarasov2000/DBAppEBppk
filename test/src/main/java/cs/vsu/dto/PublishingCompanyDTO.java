@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +22,6 @@ public class PublishingCompanyDTO {
     @Getter @Setter
     private String name;
 
-//    @Getter @Setter @Many
-//    private Set <BookDTO> books = new HashSet <>();
+    @Getter @Setter @Many
+    private Set <BookDTO> books = new HashSet <>();
 }

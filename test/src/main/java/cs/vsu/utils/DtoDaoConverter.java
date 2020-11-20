@@ -4,10 +4,12 @@ import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.Many;
 import cs.vsu.annotations.One;
 import lombok.SneakyThrows;
+import org.hibernate.LazyInitializationException;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.AnnotationTypeMismatchException;
 import java.lang.reflect.Field;
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -31,8 +33,12 @@ public class DtoDaoConverter implements Converter{
             } else if (field.isAnnotationPresent(Many.class)) {
                 Field targetField = obj.getClass().getDeclaredField(field.getName());
                 targetField.setAccessible(true);
-                for (Object o : ((Set) field.get(input))) {
-                    ((Set) targetField.get(obj)).add(convert(o));
+                try {
+                    for (Object o : ((Set) field.get(input))) {
+                        ((Set) targetField.get(obj)).add(convert(o));
+                    }
+                }catch (LazyInitializationException e){
+                    targetField.set(obj, new HashSet<>());
                 }
             } else {
                 Field targetField = obj.getClass().getDeclaredField(field.getName());
