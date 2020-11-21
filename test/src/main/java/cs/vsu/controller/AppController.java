@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class AppController {
@@ -44,8 +45,7 @@ public class AppController {
         UserDTO user = service.getUser(userDTO);
         ModelAndView modelAndView = new ModelAndView();
         if(user != null) {
-            List <BookDTO> books = service.getAllBooks();
-//            Set <BookDTO> books = user.getBooks();
+            Set <BookDTO> books = user.getBooks();
 
             modelAndView.setViewName("main");
             setNavBarFields(modelAndView, user);

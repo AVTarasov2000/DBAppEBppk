@@ -34,7 +34,7 @@ public class User {
     @JoinTable(
             name = "library.book_mark",
             joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "id") }
+            inverseJoinColumns = { @JoinColumn(name = "book_id") }
     )
 //    @JoinColumn(name = "id")
     @Getter @Setter @Many

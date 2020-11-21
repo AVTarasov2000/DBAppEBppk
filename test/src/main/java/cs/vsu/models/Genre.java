@@ -15,7 +15,7 @@ import java.util.Set;
 @DTODAO(targetClass = GenreDTO.class)
 public class Genre {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
     @Column(name = "id", nullable = false, unique = true)
     private Integer id;
@@ -24,12 +24,7 @@ public class Genre {
     private String name;
 
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "library.book_genre",
-            joinColumns = { @JoinColumn(name = "book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "id") }
-    )
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "genres")
     @Getter @Setter @Many
     private Set <Book> books = new HashSet <>();
 

@@ -17,7 +17,7 @@ import java.util.Set;
 @DTODAO(targetClass = BookDTO.class)
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
     @Column(name = "id", nullable = false, unique = true)
     private Integer bookId;
@@ -38,7 +38,7 @@ public class Book {
     @JoinTable(
             name = "library.book_author",
             joinColumns = { @JoinColumn(name = "book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "id") }
+            inverseJoinColumns = { @JoinColumn(name = "author_id") }
     )
     @Getter @Setter @Many
     private Set <Author> authors = new HashSet <>();
@@ -47,7 +47,7 @@ public class Book {
     @JoinTable(
             name = "library.book_genre",
             joinColumns = { @JoinColumn(name = "book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "id") }
+            inverseJoinColumns = { @JoinColumn(name = "genre_id") }
     )
     @Getter @Setter @Many
     private Set <Genre> genres = new HashSet <>();
