@@ -18,7 +18,6 @@
 
 
     <script>
-
     </script>
 </head>
 <body>
@@ -50,8 +49,8 @@
                         </c:forEach>
                     </select>
 
-                    <label for="authorId"></label>
-                    <select class="form-group form-control" name="author" id="authorId">
+                    <label for="author"></label>
+                    <select class="form-group form-control" name="author" id="author">
                         <option value=""></option>
                         <c:forEach items="${authors}" var="author">
                             <option value="${author.authorId}:${author.authorName}"><c:out value="${author.authorName}"/></option>
@@ -86,43 +85,89 @@
         <thead class="thead-default">
         <tr>
             <th>Book Name</th>
-            <th>Publishing Company</th>
             <th>Release Date</th>
             <th>link to file</th>
+            <th>Publishing Company</th>
             <th>authors</th>
             <th>genres</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${books}" var="book">
+        <c:forEach items="${books}" var="bookName">
             <tr>
-                <td><c:out value="${book.bookName}"/></td>
-                <td><c:out value="${book.publishingCompany.name}"/></td>
-                <td><c:out value="${book.bookReleaseDate}"/></td>
-                <td><c:out value="${book.bookLinkToFile}"/></td>
-                <td><c:forEach items="${book.authors}" var="author">|<c:out value="${author.authorName}"/>|</c:forEach> </td>
-                <td><c:forEach items="${book.genres}" var="genre">|<c:out value="${genre.name}"/>|</c:forEach> </td>
-<%--                <td>--%>
-<%--                    <c:url value="/updateBooks" var="updateUrl"/>--%>
-<%--                    <form action="${updateUrl}" method="post" class="form-inline">--%>
-<%--                        <input type="hidden" name="login" value="${login}">--%>
-<%--                        <input type="hidden" name="password" value="${password}">--%>
-<%--                        <input type="hidden" name="bookId" value="${book.bookId}">--%>
-<%--                        <label for="book" class="sr-only">book</label>--%>
-<%--                        <input type="text" name="bookName" id="book" class="form-group mb-2 form-control" height="30px">--%>
-<%--                        <button class="btn btn-primary mb-2" type="submit" >update</button>--%>
-<%--                    </form>--%>
-<%--                </td>--%>
+                <td><c:out value="${bookName.bookName}"/></td>
+                <td><c:out value="${bookName.bookReleaseDate}"/></td>
+                <td><c:out value="${bookName.bookLinkToFile}"/></td>
+                <td><c:out value="${bookName.publishingCompany.name}"/></td>
+                <td><c:forEach items="${bookName.authors}" var="author">|<c:out value="${author.authorName}"/>|</c:forEach> </td>
+                <td><c:forEach items="${bookName.genres}" var="genre">|<c:out value="${genre.name}"/>|</c:forEach> </td>
                 <td>
                     <c:url value="/deleteBook" var="updateUrl"/>
                     <form action="${updateUrl}" method="post" class="form-inline">
                         <input type="hidden" name="login" value="${login}">
                         <input type="hidden" name="password" value="${password}">
-                        <input type="hidden" name="bookName" value="${book.bookName}">
-                        <input type="hidden" name="bookId" value="${book.bookId}">
-                        <input type="hidden" name="bookCompanyId" value="${book.bookCompanyId}">
-                        <input type="hidden" name="bookLinkToFile" value="${book.bookLinkToFile}">
+                        <input type="hidden" name="bookName" value="${bookName.bookName}">
+                        <input type="hidden" name="bookId" value="${bookName.bookId}">
+                        <input type="hidden" name="bookCompanyId" value="${bookName.bookCompanyId}">
+                        <input type="hidden" name="bookLinkToFile" value="${bookName.bookLinkToFile}">
                         <button class="btn btn-primary mb-2" type="submit" >delete</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <c:url value="/updateBook" var="updateUrl"/>
+                <form action="${updateUrl}" method="post" class="form-inline">
+                    <input type="hidden" name="login" value="${login}">
+                    <input type="hidden" name="password" value="${password}">
+                    <input type="hidden" name="bookId" value="${bookName.bookId}">
+                    <td>
+                        <input type="text" value="${bookName.bookName}" name="bookName" id="name" class="form-group mb-2 form-control" height="30px">
+                    </td>
+                    <td>
+                        <input type="text" value="${bookName.bookReleaseDate}" name="bookReleaseDate" id="releaseDate" class="form-group mb-2 form-control" height="30px">
+                    </td>
+                    <td>
+                        <input type="text" value="${bookName.bookLinkToFile}" name="bookLinkToFile" id="bookLink" class="form-group mb-2 form-control" height="30px">
+                    </td>
+                    <td>
+<%--                        <input type="text" value="${bookName.publishingCompany.name}" name="bookCompanyId" id="bookCompany" class="form-group mb-2 form-control" height="30px">--%>
+                        <select class="form-group form-control" name="company" id="bookCompanyId">
+                            <option value=""></option>
+                            <c:forEach items="${companys}" var="company">
+                                <option value="${company.id}:${company.name}"><c:out value="${company.name}"/></option>
+                            </c:forEach>
+                        </select>
+                        <button class="btn btn-primary mb-2" type="submit" >update</button>
+                    </td>
+                </form>
+                <td>
+                    <form>
+                        <select class="form-group form-control" name="author">
+                            <option value=""></option>
+                            <c:forEach items="${authors}" var="author">
+                                <option value="${author.authorId}:${author.authorName}"><c:out value="${author.authorName}"/></option>
+                            </c:forEach>
+                        </select>
+                        <input name="bookId" value="${book.bookId}" type="hidden">
+                        <c:url value="/deleteBookAuthor" var="deleteBookAuthor"/>
+                        <button formaction="${deleteBookAuthor}" class="btn btn-primary mb-2" type="submit" >delete</button>
+                        <c:url value="/addBookAuthor" var="addBookAuthor"/>
+                        <button formaction="${addBookAuthor}" class="btn btn-primary mb-2" type="submit" >add</button>
+                    </form>
+                </td>
+                <td>
+                    <form>
+                        <select class="form-group form-control" name="genre">
+                            <option value=""></option>
+                            <c:forEach items="${genres}" var="genre">
+                                <option value="${genre.id}:${genre.name}"><c:out value="${genre.name}"/></option>
+                            </c:forEach>
+                        </select>
+                        <input  name="bookId" value="${book.bookId}" type="hidden">
+                        <c:url value="/deleteBookGenre" var="deleteBookGenre"/>
+                        <button formaction="${deleteBookGenre}" class="btn btn-primary mb-2" type="submit" >delete</button>
+                        <c:url value="/addBookGenre" var="addBookGenre"/>
+                        <button formaction="${addBookGenre}" class="btn btn-primary mb-2" type="submit" >add</button>
                     </form>
                 </td>
             </tr>

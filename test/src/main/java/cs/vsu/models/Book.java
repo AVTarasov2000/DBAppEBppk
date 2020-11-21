@@ -30,7 +30,7 @@ public class Book {
     @Column(name = "link_to_file")
     @Getter @Setter
     private String bookLinkToFile;
-    @Column(name = "company_id", insertable = false, updatable = false)
+    @Column(name = "company_id")
     @Getter @Setter
     private Integer bookCompanyId;
 
@@ -52,8 +52,8 @@ public class Book {
     @Getter @Setter @Many
     private Set <Genre> genres = new HashSet <>();
 
-    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "company_id")
-    @Getter @Setter @One
-    private PublishingCompany publishingCompany;
+//    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "company_id")
+//    @Getter @Setter @One
+//    private PublishingCompany publishingCompany;
 }

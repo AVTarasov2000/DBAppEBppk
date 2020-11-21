@@ -22,7 +22,7 @@ public class BookDaoImpl implements BookDao {
 
 
     @Override
-    public List <Book> getUsersBooks() {
+    public List <Book> getAllBooks() {
         Session session = sessionFactory.openSession();
         Query <Book> query = session.createQuery("FROM Book");
         List <Book> res = query.getResultList();
@@ -33,7 +33,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public void addBook(Book book) {
         Session session = sessionFactory.openSession();
-        book.getPublishingCompany().getBooks().add(book);
+//        book.getPublishingCompany().getBooks().add(book);
         for (Genre genre : book.getGenres()) {
             genre.getBooks().add(book);
         }
@@ -44,7 +44,25 @@ public class BookDaoImpl implements BookDao {
         session.save(book);
         transaction.commit();
         session.close();
+    }
 
+    @Override
+    public void addBookAuthor(Integer bookId, Integer authorId) {
+
+    }
+
+    @Override
+    public void deleteBookAuthor(Integer bookId, Integer authorId) {
+
+    }
+
+    @Override
+    public void deleteBookGenre(Integer bookId, Integer genreId) {
+
+    }
+
+    @Override
+    public void addBookGenre(Integer bookId, Integer genreId) {
 
     }
 }

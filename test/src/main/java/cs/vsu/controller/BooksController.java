@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -53,30 +52,41 @@ public class BooksController {
                                   @ModelAttribute("genre") String genreStr
     ) {
         UserDTO user = service.getUser(userDTO);
-        String[] author = authorStr.split(":");
-        String[] genre = genreStr.split(":");
-        String[] company = companyStr.split(":");
-        bookDTO.getAuthors().add(new AuthorDTO(Integer.parseInt(author[0]),author[1],new HashSet <>()));
-        bookDTO.getGenres().add(new GenreDTO(Integer.parseInt(genre[0]), genre[1], new HashSet<>()));
-        bookDTO.setPublishingCompany(new PublishingCompanyDTO(Integer.parseInt(company[0]),company[1],new HashSet<>()));
         if(user == null){
             return appController.signIn();
         }
-        bookDTO.setBookCompanyId(Integer.parseInt(company[0]));
+        if(!authorStr.equals("")) {
+            String[] author = authorStr.split(":");
+            bookDTO.getAuthors().add(new AuthorDTO(Integer.parseInt(author[0]), author[1], new HashSet <>()));
+        }
+        if(!genreStr.equals("")) {
+            String[] genre = genreStr.split(":");
+            bookDTO.getGenres().add(new GenreDTO(Integer.parseInt(genre[0]), genre[1], new HashSet <>()));
+        }
+        if(!companyStr.equals("")) {
+            String[] company = companyStr.split(":");
+//            bookDTO.setPublishingCompany(new PublishingCompanyDTO(Integer.parseInt(company[0]), company[1], new HashSet <>()));
+            bookDTO.setBookCompanyId(Integer.parseInt(company[0]));
+        }
         service.addBook(bookDTO);
         return toBooks(user);
     }
 
-    @RequestMapping(value = "/updateBooks", method = {RequestMethod.POST})
+    @RequestMapping(value = "/updateBook", method = {RequestMethod.POST})
     public ModelAndView updateAuthor(@ModelAttribute("user") UserDTO userDTO,
-                                     @ModelAttribute("booksName") String authorName,
-                                     @ModelAttribute("booksId") Integer authorId) {
+                                     @ModelAttribute("book") BookDTO bookDTO,
+                                     @ModelAttribute("company") String companyStr) {
         UserDTO user = service.getUser(userDTO);
-//        AuthorDTO authorDTO = new AuthorDTO(authorId, authorName);
         if(user == null){
             return appController.signIn();
         }
-//        service.updateAuthor(authorDTO);
+
+        if(!companyStr.equals("")) {
+            String[] company = companyStr.split(":");
+//            bookDTO.setPublishingCompany(new PublishingCompanyDTO(Integer.parseInt(company[0]), company[1], new HashSet <>()));
+            bookDTO.setBookCompanyId(Integer.parseInt(company[0]));
+        }
+        service.updateBook(bookDTO);
         return toBooks(user);
 
     }
@@ -84,12 +94,64 @@ public class BooksController {
     @RequestMapping(value = "/deleteBook", method = {RequestMethod.POST})
     public ModelAndView deleteAuthor(@ModelAttribute("user") UserDTO userDTO,
                                      @ModelAttribute("book") BookDTO bookDTO
-                                     ) {
+    ) {
         UserDTO user = service.getUser(userDTO);
         if(user == null){
             return appController.signIn();
         }
         service.deleteBook(bookDTO);
+        return toBooks(user);
+    }
+
+   @RequestMapping(value = "/deleteBookAuthor", method = {RequestMethod.POST})
+    public ModelAndView deleteBookAuthor(@ModelAttribute("user") UserDTO userDTO,
+                                         @ModelAttribute("bookId") String bookId,
+                                         @ModelAttribute("authorId") String authorId
+    ) {
+        UserDTO user = service.getUser(userDTO);
+        if(user == null){
+            return appController.signIn();
+        }
+        service.deleteBookAuthor(Integer.parseInt(bookId), Integer.parseInt(authorId));
+        return toBooks(user);
+    }
+
+    @RequestMapping(value = "/addBookAuthor", method = {RequestMethod.POST})
+    public ModelAndView addBookAuthor(@ModelAttribute("user") UserDTO userDTO,
+                                      @ModelAttribute("bookId") String bookId,
+                                      @ModelAttribute("authorId") String authorId
+    ) {
+        UserDTO user = service.getUser(userDTO);
+        if(user == null){
+            return appController.signIn();
+        }
+        service.addBookAuthor(Integer.parseInt(bookId), Integer.parseInt(authorId));
+        return toBooks(user);
+    }
+
+    @RequestMapping(value = "/deleteBookGenre", method = {RequestMethod.POST})
+    public ModelAndView deleteBookGenre(@ModelAttribute("user") UserDTO userDTO,
+                                        @ModelAttribute("bookId") String bookId,
+                                        @ModelAttribute("genreId") String genreId
+    ) {
+        UserDTO user = service.getUser(userDTO);
+        if(user == null){
+            return appController.signIn();
+        }
+        service.deleteBookGenre(Integer.parseInt(bookId), Integer.parseInt(genreId));
+        return toBooks(user);
+    }
+
+    @RequestMapping(value = "/addBookGenre", method = {RequestMethod.POST})
+    public ModelAndView addBookGenre(@ModelAttribute("user") UserDTO userDTO,
+                                     @ModelAttribute("bookId") String bookId,
+                                     @ModelAttribute("genreId") String genreId
+    ) {
+        UserDTO user = service.getUser(userDTO);
+        if(user == null){
+            return appController.signIn();
+        }
+        service.addBookGenre(Integer.parseInt(bookId), Integer.parseInt(genreId));
         return toBooks(user);
     }
 }

@@ -3,6 +3,7 @@ package cs.vsu.dto;
 import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.Many;
 import cs.vsu.annotations.One;
+import cs.vsu.annotations.Skip;
 import cs.vsu.models.Book;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,7 +34,7 @@ public class BookDTO {
     private Set <AuthorDTO> authors = new HashSet <>();
     @Getter @Setter @Many
     private Set <GenreDTO> genres= new HashSet <>();
-    @Getter @Setter @One
+    @Getter @Setter @Skip
     private PublishingCompanyDTO publishingCompany;
 
 }

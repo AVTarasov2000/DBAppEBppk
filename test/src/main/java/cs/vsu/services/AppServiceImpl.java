@@ -80,6 +80,11 @@ public class AppServiceImpl implements AppService {
         bookDao.addBook((Book) converter.convert(bookDTO));
     }
 
+    @Override
+    public void updateBook(BookDTO bookDTO) {
+        simpleBookDao.update((Book) converter.convert(bookDTO));
+    }
+
     public void deleteBook(BookDTO bookDTO){
         simpleBookDao.delete((Book) converter.convert(bookDTO));
     }
@@ -119,10 +124,31 @@ public class AppServiceImpl implements AppService {
     @Override
     public List <BookDTO> getAllBooks() {
         List<BookDTO> res = new ArrayList <>();
-        List<Book> lst = bookDao.getUsersBooks();
+        List<Book> lst = bookDao.getAllBooks();
         lst.forEach( a -> res.add((BookDTO) converter.convert(a)));
+        res.forEach(o-> o.setPublishingCompany((PublishingCompanyDTO) converter.convert(publishingCompanyDao.findById(o.getBookCompanyId(), PublishingCompany.class))));
 //        bookMarkDao.getAll(BookMark.class).forEach( a -> res.add((BookMarkDTO) converter.convert(a)));
         return res;
+    }
+
+    @Override
+    public void addBookAuthor(Integer bookId, Integer authorId) {
+        bookDao.addBookAuthor(bookId, authorId);
+    }
+
+    @Override
+    public void deleteBookAuthor(Integer bookId, Integer authorID) {
+        bookDao.deleteBookAuthor(bookId,authorID);
+    }
+
+    @Override
+    public void deleteBookGenre(Integer bookId, Integer genreId) {
+        bookDao.deleteBookGenre(bookId, genreId);
+    }
+
+    @Override
+    public void addBookGenre(Integer bookId, Integer genreId) {
+        bookDao.addBookGenre(bookId,genreId);
     }
 
     ///setters--------------------------------------------------------------------------------

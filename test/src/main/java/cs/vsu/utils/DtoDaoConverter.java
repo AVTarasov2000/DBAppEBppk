@@ -3,6 +3,7 @@ package cs.vsu.utils;
 import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.Many;
 import cs.vsu.annotations.One;
+import cs.vsu.annotations.Skip;
 import lombok.SneakyThrows;
 import org.hibernate.LazyInitializationException;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,9 @@ public class DtoDaoConverter implements Converter{
         for (Field field :
                 input.getClass().getDeclaredFields()) {
             field.setAccessible(true);
+            if (field.isAnnotationPresent(Skip.class)){
+                continue;
+            }
             if (field.isAnnotationPresent(One.class)) {
                 Field targetField = obj.getClass().getDeclaredField(field.getName());
                 targetField.setAccessible(true);
@@ -40,7 +44,7 @@ public class DtoDaoConverter implements Converter{
                 }catch (LazyInitializationException e){
                     targetField.set(obj, new HashSet<>());
                 }
-            } else {
+            }else {
                 Field targetField = obj.getClass().getDeclaredField(field.getName());
                 targetField.setAccessible(true);
                 targetField.set(obj, field.get(input));
