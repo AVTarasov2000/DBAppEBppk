@@ -45,24 +45,4 @@ public class BookDaoImpl implements BookDao {
         transaction.commit();
         session.close();
     }
-
-    @Override
-    public void addBookAuthor(Integer bookId, Integer authorId) {
-
-    }
-
-    @Override
-    public void deleteBookAuthor(Integer bookId, Integer authorId) {
-
-    }
-
-    @Override
-    public void deleteBookGenre(Integer bookId, Integer genreId) {
-
-    }
-
-    @Override
-    public void addBookGenre(Integer bookId, Integer genreId) {
-
-    }
 }

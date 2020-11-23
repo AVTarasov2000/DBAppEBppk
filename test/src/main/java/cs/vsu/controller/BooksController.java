@@ -56,12 +56,18 @@ public class BooksController {
             return appController.signIn();
         }
         if(!authorStr.equals("")) {
-            String[] author = authorStr.split(":");
-            bookDTO.getAuthors().add(new AuthorDTO(Integer.parseInt(author[0]), author[1], new HashSet <>()));
+            String[] authors = authorStr.split(",");
+            for (String auth : authors) {
+                String[] author = auth.split(":");
+                bookDTO.getAuthors().add(new AuthorDTO(Integer.parseInt(author[0]), author[1], new HashSet <>()));
+            }
         }
         if(!genreStr.equals("")) {
-            String[] genre = genreStr.split(":");
-            bookDTO.getGenres().add(new GenreDTO(Integer.parseInt(genre[0]), genre[1], new HashSet <>()));
+            String[] genres = genreStr.split(",");
+            for (String gen : genres) {
+                String[] genre = gen.split(":");
+                bookDTO.getGenres().add(new GenreDTO(Integer.parseInt(genre[0]), genre[1], new HashSet <>()));
+            }
         }
         if(!companyStr.equals("")) {
             String[] company = companyStr.split(":");
@@ -75,15 +81,32 @@ public class BooksController {
     @RequestMapping(value = "/updateBook", method = {RequestMethod.POST})
     public ModelAndView updateAuthor(@ModelAttribute("user") UserDTO userDTO,
                                      @ModelAttribute("book") BookDTO bookDTO,
-                                     @ModelAttribute("company") String companyStr) {
+                                     @ModelAttribute("company") String companyStr,
+                                     @ModelAttribute("author") String authorStr,
+                                     @ModelAttribute("genre") String genreStr) {
         UserDTO user = service.getUser(userDTO);
         if(user == null){
             return appController.signIn();
         }
 
+        if(!authorStr.equals("")) {
+            String[] authors = authorStr.split(",");
+            for (String auth : authors) {
+                String[] author = auth.split(":");
+                bookDTO.getAuthors().add(new AuthorDTO(Integer.parseInt(author[0]), author[1], new HashSet <>()));
+            }
+        }
+
+        if(!genreStr.equals("")) {
+            String[] genres = genreStr.split(",");
+            for (String gen : genres) {
+                String[] genre = gen.split(":");
+                bookDTO.getGenres().add(new GenreDTO(Integer.parseInt(genre[0]), genre[1], new HashSet <>()));
+            }
+        }
+
         if(!companyStr.equals("")) {
             String[] company = companyStr.split(":");
-//            bookDTO.setPublishingCompany(new PublishingCompanyDTO(Integer.parseInt(company[0]), company[1], new HashSet <>()));
             bookDTO.setBookCompanyId(Integer.parseInt(company[0]));
         }
         service.updateBook(bookDTO);
@@ -112,7 +135,7 @@ public class BooksController {
         if(user == null){
             return appController.signIn();
         }
-        service.deleteBookAuthor(Integer.parseInt(bookId), Integer.parseInt(authorId));
+//        service.deleteBookAuthor(Integer.parseInt(bookId), Integer.parseInt(authorId));
         return toBooks(user);
     }
 
@@ -125,7 +148,7 @@ public class BooksController {
         if(user == null){
             return appController.signIn();
         }
-        service.addBookAuthor(Integer.parseInt(bookId), Integer.parseInt(authorId));
+//        service.addBookAuthor(Integer.parseInt(bookId), Integer.parseInt(authorId));
         return toBooks(user);
     }
 
@@ -138,7 +161,7 @@ public class BooksController {
         if(user == null){
             return appController.signIn();
         }
-        service.deleteBookGenre(Integer.parseInt(bookId), Integer.parseInt(genreId));
+//        service.deleteBookGenre(Integer.parseInt(bookId), Integer.parseInt(genreId));
         return toBooks(user);
     }
 
@@ -151,7 +174,7 @@ public class BooksController {
         if(user == null){
             return appController.signIn();
         }
-        service.addBookGenre(Integer.parseInt(bookId), Integer.parseInt(genreId));
+//        service.addBookGenre(Integer.parseInt(bookId), Integer.parseInt(genreId));
         return toBooks(user);
     }
 }

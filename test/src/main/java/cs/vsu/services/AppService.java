@@ -23,12 +23,4 @@ public interface AppService {
     void addBook(BookDTO bookDTO);
     void deleteBook(BookDTO bookDTO);
     void updateBook(BookDTO bookDTO);
-
-    void addBookAuthor(Integer bookId, Integer authorId);
-
-    void deleteBookGenre(Integer bookId, Integer authorId);
-
-    void addBookGenre(Integer bookId, Integer genreId);
-
-    void deleteBookAuthor(Integer bookId, Integer genreId);
 }

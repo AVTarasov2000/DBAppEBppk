@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AppServiceImpl implements AppService {
@@ -96,7 +97,9 @@ public class AppServiceImpl implements AppService {
             return null;
         }
         else {
-            return (UserDTO) converter.convert(user1);
+            UserDTO userDTO = (UserDTO) converter.convert(user1);
+            userDTO.getBooks().forEach(o-> o.setPublishingCompany((PublishingCompanyDTO) converter.convert(publishingCompanyDao.findById(o.getBookCompanyId(), PublishingCompany.class))));
+            return userDTO;
         }
     }
 
@@ -131,25 +134,7 @@ public class AppServiceImpl implements AppService {
         return res;
     }
 
-    @Override
-    public void addBookAuthor(Integer bookId, Integer authorId) {
-        bookDao.addBookAuthor(bookId, authorId);
-    }
 
-    @Override
-    public void deleteBookAuthor(Integer bookId, Integer authorID) {
-        bookDao.deleteBookAuthor(bookId,authorID);
-    }
-
-    @Override
-    public void deleteBookGenre(Integer bookId, Integer genreId) {
-        bookDao.deleteBookGenre(bookId, genreId);
-    }
-
-    @Override
-    public void addBookGenre(Integer bookId, Integer genreId) {
-        bookDao.addBookGenre(bookId,genreId);
-    }
 
     ///setters--------------------------------------------------------------------------------
     @Autowired

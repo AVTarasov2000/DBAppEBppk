@@ -10,15 +10,12 @@
     <meta name="generator" content="Jekyll v4.1.1">
     <link href="<c:url value="/resources/main.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/bootstrap-4.0.0-dist/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css"/>
-    <script src="<c:url value="/resources/jquery-3.5.1.min.js"/>"></script>
-    <script src="<c:url value="/resources/bootstrap-4.0.0-dist/js/bootstrap.bundle.min.js"/>"></script>
     <link href="<c:url value="/resources/bootstrap-multiselect-master/dist/css/bootstrap-multiselect.min.css"/>" rel="stylesheet" type="text/css"/>
-    <script src="<c:url value="/resources/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.min.js"/>"></script>
+
 <%--    todo make select good--%>
 
 
-    <script>
-    </script>
+
 </head>
 <body>
 <%@include file="navbar.jsp"%>
@@ -49,16 +46,18 @@
                         </c:forEach>
                     </select>
 
+                    <input type="hidden" value="" name="author" id="author">
                     <label for="author"></label>
-                    <select class="form-group form-control" name="author" id="author">
+                    <select class="form-group form-control" id="authorss" multiple  onclick="$('#author').val($('#authorss').val())">
                         <option value=""></option>
                         <c:forEach items="${authors}" var="author">
                             <option value="${author.authorId}:${author.authorName}"><c:out value="${author.authorName}"/></option>
                         </c:forEach>
                     </select>
 
+                    <input type="hidden" value="" name="genre" id="genre">
                     <label for="genreId"></label>
-                    <select class="form-group form-control" name="genre" id="genreId">
+                    <select class="form-group form-control" name="genress" multiple id="genreId" onclick="$('#genre').val($('#genreId').val())">
                     <option value=""></option>
                         <c:forEach items="${genres}" var="genre">
                             <option value="${genre.id}:${genre.name}"><c:out value="${genre.name}"/></option>
@@ -67,7 +66,7 @@
 
 <%--                    <label for="newBook" class="sr-only">author</label>--%>
 <%--                    <input type="text" name="name" id="newBook" class="form-group mb-2 form-control" height="30px">--%>
-                    <button class="btn btn-primary mb-2" type="submit" >add</button>
+                    <button class="btn btn-primary mb-2" type="submit">add</button>
                 </form>
             </div>
         </div>
@@ -137,39 +136,61 @@
                                 <option value="${company.id}:${company.name}"><c:out value="${company.name}"/></option>
                             </c:forEach>
                         </select>
-                        <button class="btn btn-primary mb-2" type="submit" >update</button>
                     </td>
-                </form>
-                <td>
-                    <form>
-                        <select class="form-group form-control" name="author">
+                    <td>
+                    <input type="hidden" value="" name="author" id="author">
+                        <label for="author"></label>
+                        <select class="form-group form-control" id="authorss" multiple  onclick="$('#author').val($('#authorss').val())">
                             <option value=""></option>
                             <c:forEach items="${authors}" var="author">
                                 <option value="${author.authorId}:${author.authorName}"><c:out value="${author.authorName}"/></option>
                             </c:forEach>
                         </select>
-                        <input name="bookId" value="${book.bookId}" type="hidden">
-                        <c:url value="/deleteBookAuthor" var="deleteBookAuthor"/>
-                        <button formaction="${deleteBookAuthor}" class="btn btn-primary mb-2" type="submit" >delete</button>
-                        <c:url value="/addBookAuthor" var="addBookAuthor"/>
-                        <button formaction="${addBookAuthor}" class="btn btn-primary mb-2" type="submit" >add</button>
-                    </form>
-                </td>
-                <td>
-                    <form>
-                        <select class="form-group form-control" name="genre">
+                    </td>
+                    <td>
+                        <input type="hidden" value="" name="genre" id="genre">
+                        <label for="genreId"></label>
+                        <select class="form-group form-control" name="genress" multiple id="genreId" onclick="$('#genre').val($('#genreId').val())">
                             <option value=""></option>
                             <c:forEach items="${genres}" var="genre">
                                 <option value="${genre.id}:${genre.name}"><c:out value="${genre.name}"/></option>
                             </c:forEach>
-                        </select>
-                        <input  name="bookId" value="${book.bookId}" type="hidden">
-                        <c:url value="/deleteBookGenre" var="deleteBookGenre"/>
-                        <button formaction="${deleteBookGenre}" class="btn btn-primary mb-2" type="submit" >delete</button>
-                        <c:url value="/addBookGenre" var="addBookGenre"/>
-                        <button formaction="${addBookGenre}" class="btn btn-primary mb-2" type="submit" >add</button>
-                    </form>
-                </td>
+                    </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary mb-2" type="submit" >update</button>
+                    </td>
+                </form>
+<%--                <td>--%>
+<%--                    <form>--%>
+<%--                        <select class="form-group form-control" name="author">--%>
+<%--                            <option value=""></option>--%>
+<%--                            <c:forEach items="${authors}" var="author">--%>
+<%--                                <option value="${author.authorId}:${author.authorName}"><c:out value="${author.authorName}"/></option>--%>
+<%--                            </c:forEach>--%>
+<%--                        </select>--%>
+<%--                        <input name="bookId" value="${book.bookId}" type="hidden">--%>
+<%--                        <c:url value="/deleteBookAuthor" var="deleteBookAuthor"/>--%>
+<%--                        <button formaction="${deleteBookAuthor}" class="btn btn-primary mb-2" type="submit" >delete</button>--%>
+<%--                        <c:url value="/addBookAuthor" var="addBookAuthor"/>--%>
+<%--                        <button formaction="${addBookAuthor}" class="btn btn-primary mb-2" type="submit" >add</button>--%>
+<%--                    </form>--%>
+<%--                </td>--%>
+<%--                <td>--%>
+<%--                    <form>--%>
+<%--                        <select class="form-group form-control" name="genre">--%>
+<%--                            <option value=""></option>--%>
+<%--                            <c:forEach items="${genres}" var="genre">--%>
+<%--                                <option value="${genre.id}:${genre.name}"><c:out value="${genre.name}"/></option>--%>
+<%--                            </c:forEach>--%>
+<%--                        </select>--%>
+<%--                        <input  name="bookId" value="${book.bookId}" type="hidden">--%>
+<%--                        <c:url value="/deleteBookGenre" var="deleteBookGenre"/>--%>
+<%--                        <button formaction="${deleteBookGenre}" class="btn btn-primary mb-2" type="submit" >delete</button>--%>
+<%--                        <c:url value="/addBookGenre" var="addBookGenre"/>--%>
+<%--                        <button formaction="${addBookGenre}" class="btn btn-primary mb-2" type="submit" >add</button>--%>
+<%--                    </form>--%>
+<%--                </td>--%>
             </tr>
         </c:forEach>
         </tbody>
@@ -183,6 +204,27 @@
         </p>
     </div>
 </footer>
+<script src="<c:url value="/resources/jquery-3.5.1.min.js"/>"></script>
+<script src="<c:url value="/resources/bootstrap-4.0.0-dist/js/bootstrap.bundle.min.js"/>"></script>
+<script src="<c:url value="/resources/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.min.js"/>"></script>
+<script>
+    // $('form').submit(function(event) {
+    //     event.preventDefault();
+    //
+    //     var values = $(this).find('select').val();
+    //     if (values.length > 0) {
+    //         $.get( "/prodazha", { "rooms": values.join() } );
+    //     }
+    // })
+
+    // $(document).ready(function() {
+    //     $('select').onclick(function (){
+    //
+    //     })
+    //     let select = $('.mdb-select');
+    //     select.materialSelect();
+    // });
+</script>
 <script>window.jQuery || document.write('<script src="<c:url value="/resources/jquery-3.5.1.min.js"/>"><\/script>')</script><script src="<c:url value="/resources/bootstrap-4.0.0-dist/js/bootstrap.bundle.min.js"/>"></script>
 </body>
 </html>
