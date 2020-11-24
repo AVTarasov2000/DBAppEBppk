@@ -82,8 +82,8 @@ public class BooksController {
     public ModelAndView updateAuthor(@ModelAttribute("user") UserDTO userDTO,
                                      @ModelAttribute("book") BookDTO bookDTO,
                                      @ModelAttribute("company") String companyStr,
-                                     @ModelAttribute("author") String authorStr,
-                                     @ModelAttribute("genre") String genreStr) {
+                                     @ModelAttribute("updateAuthor") String authorStr,
+                                     @ModelAttribute("updateGenre") String genreStr) {
         UserDTO user = service.getUser(userDTO);
         if(user == null){
             return appController.signIn();

@@ -92,7 +92,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${books}" var="bookName">
+        <c:forEach items="${books}" var="bookName" varStatus="status">
             <tr>
                 <td><c:out value="${bookName.bookName}"/></td>
                 <td><c:out value="${bookName.bookReleaseDate}"/></td>
@@ -131,16 +131,16 @@
                     <td>
 <%--                        <input type="text" value="${bookName.publishingCompany.name}" name="bookCompanyId" id="bookCompany" class="form-group mb-2 form-control" height="30px">--%>
                         <select class="form-group form-control" name="company" id="bookCompanyId">
-                            <option value=""></option>
+<%--                            <option value=""></option>--%>
                             <c:forEach items="${companys}" var="company">
                                 <option value="${company.id}:${company.name}"><c:out value="${company.name}"/></option>
                             </c:forEach>
                         </select>
                     </td>
                     <td>
-                    <input type="hidden" value="" name="author" id="author">
+                    <input type="hidden" value="" name="updateAuthor" id="updateAuthor${status.index}">
                         <label for="author"></label>
-                        <select class="form-group form-control" id="authorss" multiple  onclick="$('#author').val($('#authorss').val())">
+                        <select class="form-group form-control" id="updateAuthorss${status.index}" multiple  onclick="$('#updateAuthor${status.index}').val($('#updateAuthorss${status.index}').val())">
                             <option value=""></option>
                             <c:forEach items="${authors}" var="author">
                                 <option value="${author.authorId}:${author.authorName}"><c:out value="${author.authorName}"/></option>
@@ -148,9 +148,9 @@
                         </select>
                     </td>
                     <td>
-                        <input type="hidden" value="" name="genre" id="genre">
+                        <input type="hidden" value="" name="updateGenre" id="updateGenre${status.index}">
                         <label for="genreId"></label>
-                        <select class="form-group form-control" name="genress" multiple id="genreId" onclick="$('#genre').val($('#genreId').val())">
+                        <select class="form-group form-control" name="genress" multiple id="updateGenres${status.index}" onclick="$('#updateGenre${status.index}').val($('#updateGenres${status.index}').val())">
                             <option value=""></option>
                             <c:forEach items="${genres}" var="genre">
                                 <option value="${genre.id}:${genre.name}"><c:out value="${genre.name}"/></option>
