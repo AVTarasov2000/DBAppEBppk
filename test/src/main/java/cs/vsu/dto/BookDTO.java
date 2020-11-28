@@ -36,5 +36,7 @@ public class BookDTO {
     private Set <GenreDTO> genres= new HashSet <>();
     @Getter @Setter @Skip
     private PublishingCompanyDTO publishingCompany;
+    @Getter @Setter @Skip
+    private String middleRating;
 
 }

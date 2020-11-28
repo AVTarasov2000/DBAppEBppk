@@ -51,30 +51,55 @@
 <jsp:include page="navbar.jsp"/>
 
 <main role="main">
-    <table class="table table-inverse">
-        <thead class="thead-default">
-        <tr>
-            <th>Book Name</th>
-            <th>Publishing Company</th>
-            <th>Release Date</th>
-            <th>link to file</th>
-            <th>authors</th>
-            <th>genres</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${books}" var="bookName">
-            <tr>
-                <td><c:out value="${bookName.bookName}"/></td>
-                <td><c:out value="${bookName.publishingCompany.name}"/></td>
-                <td><c:out value="${bookName.bookReleaseDate}"/></td>
-                <td><c:out value="${bookName.bookLinkToFile}"/></td>
-                <td><c:forEach items="${bookName.authors}" var="author">|<c:out value="${author.authorName}"/>|</c:forEach> </td>
-                <td><c:forEach items="${bookName.genres}" var="genre">|<c:out value="${genre.name}"/>|</c:forEach> </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+    <div class="row">
+    <c:forEach items="${books}" var="book">
+
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${book.bookName}</text></svg>
+                <div class="card-body">
+                    <p class="card-text">
+                        publishingCompany: ${book.publishingCompany.name}<br>
+                        releaseDate: ${book.bookReleaseDate}<br>
+                        authors: <c:forEach items="${book.authors}" var="author"><c:out value="${author.authorName}"/>,</c:forEach><br>
+                        genres: <c:forEach items="${book.genres}" var="genre"><c:out value="${genre.name}"/>,</c:forEach><br>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Read</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Mark</button>
+                        </div>
+                        <small class="text-muted">${book.middleRating}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </c:forEach>
+    </div>
+<%--    <table class="table table-inverse">--%>
+<%--        <thead class="thead-default">--%>
+<%--        <tr>--%>
+<%--            <th>Book Name</th>--%>
+<%--            <th>Publishing Company</th>--%>
+<%--            <th>Release Date</th>--%>
+<%--            <th>link to file</th>--%>
+<%--            <th>authors</th>--%>
+<%--            <th>genres</th>--%>
+<%--        </tr>--%>
+<%--        </thead>--%>
+<%--        <tbody>--%>
+<%--        <c:forEach items="${books}" var="book">--%>
+<%--            <tr>--%>
+<%--                <td><c:out value="${book.bookName}"/></td>--%>
+<%--                <td><c:out value="${book.publishingCompany.name}"/></td>--%>
+<%--                <td><c:out value="${book.bookReleaseDate}"/></td>--%>
+<%--                <td><c:out value="${book.bookLinkToFile}"/></td>--%>
+<%--                <td><c:forEach items="${book.authors}" var="author">|<c:out value="${author.authorName}"/>|</c:forEach> </td>--%>
+<%--                <td><c:forEach items="${book.genres}" var="genre">|<c:out value="${genre.name}"/>|</c:forEach> </td>--%>
+<%--            </tr>--%>
+<%--        </c:forEach>--%>
+<%--        </tbody>--%>
+<%--    </table>--%>
 
 </main>
 

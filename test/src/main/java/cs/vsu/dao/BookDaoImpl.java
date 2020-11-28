@@ -45,4 +45,18 @@ public class BookDaoImpl implements BookDao {
         transaction.commit();
         session.close();
     }
+
+    @Override
+    public String middleRating(Integer bookId) {
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(
+                "SELECT r.name from UsersRating rb\n" +
+                        "    join Rating r on rb.rating= r.id\n" +
+                        "    where rb.bookId=:bookId \n" +
+                        "    GROUP BY r.name\n" +
+                        "    order by count(*)\n"
+        );
+        query.setParameter("bookId", bookId);
+        return (String) query.getResultList().get(0);
+    }
 }

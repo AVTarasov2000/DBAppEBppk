@@ -92,23 +92,23 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${books}" var="bookName" varStatus="status">
+        <c:forEach items="${books}" var="book" varStatus="status">
             <tr>
-                <td><c:out value="${bookName.bookName}"/></td>
-                <td><c:out value="${bookName.bookReleaseDate}"/></td>
-                <td><c:out value="${bookName.bookLinkToFile}"/></td>
-                <td><c:out value="${bookName.publishingCompany.name}"/></td>
-                <td><c:forEach items="${bookName.authors}" var="author">|<c:out value="${author.authorName}"/>|</c:forEach> </td>
-                <td><c:forEach items="${bookName.genres}" var="genre">|<c:out value="${genre.name}"/>|</c:forEach> </td>
+                <td><c:out value="${book.bookName}"/></td>
+                <td><c:out value="${book.bookReleaseDate}"/></td>
+                <td><c:out value="${book.bookLinkToFile}"/></td>
+                <td><c:out value="${book.publishingCompany.name}"/></td>
+                <td><c:forEach items="${book.authors}" var="author">|<c:out value="${author.authorName}"/>|</c:forEach> </td>
+                <td><c:forEach items="${book.genres}" var="genre">|<c:out value="${genre.name}"/>|</c:forEach> </td>
                 <td>
                     <c:url value="/deleteBook" var="updateUrl"/>
                     <form action="${updateUrl}" method="post" class="form-inline">
                         <input type="hidden" name="login" value="${login}">
                         <input type="hidden" name="password" value="${password}">
-                        <input type="hidden" name="bookName" value="${bookName.bookName}">
-                        <input type="hidden" name="bookId" value="${bookName.bookId}">
-                        <input type="hidden" name="bookCompanyId" value="${bookName.bookCompanyId}">
-                        <input type="hidden" name="bookLinkToFile" value="${bookName.bookLinkToFile}">
+                        <input type="hidden" name="bookName" value="${book.bookName}">
+                        <input type="hidden" name="bookId" value="${book.bookId}">
+                        <input type="hidden" name="bookCompanyId" value="${book.bookCompanyId}">
+                        <input type="hidden" name="bookLinkToFile" value="${book.bookLinkToFile}">
                         <button class="btn btn-primary mb-2" type="submit" >delete</button>
                     </form>
                 </td>
@@ -118,15 +118,15 @@
                 <form action="${updateUrl}" method="post" class="form-inline">
                     <input type="hidden" name="login" value="${login}">
                     <input type="hidden" name="password" value="${password}">
-                    <input type="hidden" name="bookId" value="${bookName.bookId}">
+                    <input type="hidden" name="bookId" value="${book.bookId}">
                     <td>
-                        <input type="text" value="${bookName.bookName}" name="bookName" id="name" class="form-group mb-2 form-control" height="30px">
+                        <input type="text" value="${book.bookName}" name="bookName" id="name" class="form-group mb-2 form-control" height="30px">
                     </td>
                     <td>
-                        <input type="text" value="${bookName.bookReleaseDate}" name="bookReleaseDate" id="releaseDate" class="form-group mb-2 form-control" height="30px">
+                        <input type="text" value="${book.bookReleaseDate}" name="bookReleaseDate" id="releaseDate" class="form-group mb-2 form-control" height="30px">
                     </td>
                     <td>
-                        <input type="text" value="${bookName.bookLinkToFile}" name="bookLinkToFile" id="bookLink" class="form-group mb-2 form-control" height="30px">
+                        <input type="text" value="${book.bookLinkToFile}" name="bookLinkToFile" id="bookLink" class="form-group mb-2 form-control" height="30px">
                     </td>
                     <td>
 <%--                        <input type="text" value="${bookName.publishingCompany.name}" name="bookCompanyId" id="bookCompany" class="form-group mb-2 form-control" height="30px">--%>

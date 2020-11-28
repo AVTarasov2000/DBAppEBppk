@@ -99,6 +99,7 @@ public class AppServiceImpl implements AppService {
         else {
             UserDTO userDTO = (UserDTO) converter.convert(user1);
             userDTO.getBooks().forEach(o-> o.setPublishingCompany((PublishingCompanyDTO) converter.convert(publishingCompanyDao.findById(o.getBookCompanyId(), PublishingCompany.class))));
+            userDTO.getBooks().forEach(o-> o.setMiddleRating(bookDao.middleRating(o.getBookId())));
             return userDTO;
         }
     }
@@ -130,6 +131,7 @@ public class AppServiceImpl implements AppService {
         List<Book> lst = bookDao.getAllBooks();
         lst.forEach( a -> res.add((BookDTO) converter.convert(a)));
         res.forEach(o-> o.setPublishingCompany((PublishingCompanyDTO) converter.convert(publishingCompanyDao.findById(o.getBookCompanyId(), PublishingCompany.class))));
+        res.forEach(o-> o.setMiddleRating(bookDao.middleRating(o.getBookId())));
 //        bookMarkDao.getAll(BookMark.class).forEach( a -> res.add((BookMarkDTO) converter.convert(a)));
         return res;
     }
