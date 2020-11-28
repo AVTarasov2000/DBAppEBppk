@@ -24,6 +24,15 @@
                     <span class="sr-only">(current)</span>
             </li>
             <li class="nav-item active navbarli">
+                <c:url value="/choosingBookPage" var="choosingBookPage_url"/>
+                <form method="post" action="${choosingBookPage_url}">
+                    <input type="hidden" name="login" value="${login}">
+                    <input type="hidden" name="password" value="${password}">
+                    <button class="btn btn-lg btn-block" type="submit">chose book</button>
+                </form>
+                <span class="sr-only">(current)</span>
+            </li>
+            <li class="nav-item active navbarli">
                 <c:url value="/authors" var="authors_url"/>
                     <form method="post" action="${authors_url}">
                         <input type="hidden" name="login" value="${login}">

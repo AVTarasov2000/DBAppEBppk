@@ -57,6 +57,11 @@ public class BookDaoImpl implements BookDao {
                         "    order by count(*)\n"
         );
         query.setParameter("bookId", bookId);
-        return (String) query.getResultList().get(0);
+        List res = query.getResultList();
+        if (res.size()>0) {
+            return (String) query.getResultList().get(0);
+        }
+        else
+            return "";
     }
 }
