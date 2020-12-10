@@ -86,10 +86,11 @@
 </footer>
 <script>
     function sendAjax(bookId){
-        data = {"bookId":bookId, "userId":"${user.id}", "page":0};
+        data = {"login":'${login}',"password":'${password}', "bookId":bookId,  "page":0};
         $.ajax({
             type:'POST',
             url:"addToUserBooks",
+            contentType: "application/json;",
             dataType:'json',
             data: JSON.stringify(data)
             <%--data: bookId+"|${user.id}|0",--%>

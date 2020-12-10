@@ -26,6 +26,7 @@ public class AppServiceImpl implements AppService {
     private UserDao userDao;
     private BookDao bookDao;
     private Dao<UsersRating> usersRatingDao;
+    private Dao<BookMark> bookMarkDao;
     private Converter converter;
 
     @Override
@@ -62,6 +63,9 @@ public class AppServiceImpl implements AppService {
     }
 
 
+    public void addBookMark(BookMarkDTO bookMarkDTO){
+        bookMarkDao.save((BookMark) converter.convert(bookMarkDTO));
+    }
 
 
     public void addGenre(GenreDTO genreDTO){
@@ -157,6 +161,11 @@ public class AppServiceImpl implements AppService {
 //    public void setBookDao(Dao <Book> bookDao) {
 //        this.bookDao = bookDao;
 //    }
+
+    @Autowired
+    public void setBookMarkDao(Dao <BookMark> bookMarkDao) {
+        this.bookMarkDao = bookMarkDao;
+    }
 
     @Autowired
     public void setBookDao(BookDao bookDao) {

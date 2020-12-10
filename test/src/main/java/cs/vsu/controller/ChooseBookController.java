@@ -3,8 +3,11 @@ package cs.vsu.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import cs.vsu.dto.*;
 import cs.vsu.services.AppService;
+import lombok.SneakyThrows;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,21 +51,27 @@ public class ChooseBookController {
         return modelAndView;
     }
 
+    @SneakyThrows
     @RequestMapping(value = "/addToUserBooks", method = {RequestMethod.POST})
-    public void addToUserBooks(@RequestBody String search) {
-        System.out.println(search);
-        Map <String,String> myMap = new HashMap <String, String>();
+    public void addToUserBooks(@RequestBody String str) {
+        JSONObject jObject = new JSONObject(str);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            myMap = objectMapper.readValue(search, HashMap.class);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+        System.out.println(str);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setLogin(jObject.getString("login"));
+        userDTO.setPassword(jObject.getString("password"));
+
+        UserDTO user = service.getUser(userDTO);
+        if(user == null){
+            return;
         }
-        System.out.println("Map is: "+myMap);
 
-//        myMap = objectMapper.readValue(mapData, new TypeReference<HashMap<String,String>>() {});
-//        System.out.println("Map using TypeReference: "+myMap);
+        BookMarkDTO bookMarkDTO = new BookMarkDTO();
+        bookMarkDTO.setBookId(Integer.parseInt(jObject.getString("bookId")));
+        bookMarkDTO.setPage(Integer.parseInt(jObject.getString("page")));
+        bookMarkDTO.setUserId(user.getId());
+        service.addBookMark(bookMarkDTO);
+
     }
 
 }

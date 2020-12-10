@@ -23,4 +23,5 @@ public interface AppService {
     void addBook(BookDTO bookDTO);
     void deleteBook(BookDTO bookDTO);
     void updateBook(BookDTO bookDTO);
+    void addBookMark(BookMarkDTO bookMarkDTO);
 }
