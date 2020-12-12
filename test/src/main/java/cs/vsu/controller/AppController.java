@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -30,9 +32,21 @@ public class AppController {
         return toMain(userDTO, null);
     }
 
+    @RequestMapping(value = "/logIn", method = {RequestMethod.POST})
+    public ModelAndView logInCheck(@ModelAttribute("user") UserDTO userDTO) {
+        UserDTO user = service.getUser(userDTO);
+        if (user!=null) {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("index");
+            return signInPage(modelAndView,"user already exist");
+        }
+        service.addUser(userDTO);
+        return toMain(userDTO, null);
+    }
+
     @RequestMapping(value = "/tenBest", method = {RequestMethod.POST})
     public ModelAndView mainWithTenBest(@ModelAttribute("user") UserDTO userDTO) {
-        Set<BookDTO> tenBestBooks = service.getTenBestBooks();
+        List<BookDTO> tenBestBooks = service.getTenBestBooks();
         return toMain(userDTO, tenBestBooks);
     }
 
@@ -47,13 +61,13 @@ public class AppController {
     }
 
 
-    private ModelAndView toMain(UserDTO userDTO, Set<BookDTO> viewBooks){
+    private ModelAndView toMain(UserDTO userDTO, List<BookDTO> viewBooks){
         UserDTO user = service.getUser(userDTO);
         ModelAndView modelAndView = new ModelAndView();
         if(user != null) {
-            Set <BookDTO> books;
+            List <BookDTO> books;
             if(viewBooks==null)
-                books = user.getBooks();
+                books = new ArrayList <>(user.getBooks());
             else
                 books=viewBooks;
 
@@ -63,7 +77,7 @@ public class AppController {
 
             return modelAndView;
         } else {
-            return signInPage(modelAndView);
+            return signInPage(modelAndView, "there is no user with that login");
         }
     }
 
@@ -73,10 +87,10 @@ public class AppController {
         modelAndView.addObject("password", user.getPassword());
     }
 
-    private ModelAndView signInPage(ModelAndView modelAndView){
+    private ModelAndView signInPage(ModelAndView modelAndView, String message){
         modelAndView.setViewName("index");
         modelAndView.addObject("alert", true);
-        modelAndView.addObject("warning", "there is no user with that login");
+        modelAndView.addObject("warning", message);
         return modelAndView;
     }
 

@@ -39,8 +39,9 @@
 </head>
 <body class="text-center">
 
-    <c:url value="/signin" var="url"/>
-    <form class="form-signin" action="${url}" method="post">
+<c:url value="/signin" var="url_signin"/>
+<c:url value="/logIn" var="url_login"/>
+    <form class="form-signin"  method="post">
         <c:if test="${alert}">
             <div class="alert alert-dark text-center" role="alert" >
                     ${warning}
@@ -58,7 +59,8 @@
 <%--        <label for="inputNameInSystem" class="sr-only">name in system</label>--%>
 <%--        <input name="name" type="text" id="inputNameInSystem" class="form-control" placeholder="name in system" required>--%>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="setCookie()">Sign in</button>
+        <button formaction="${url_signin}" class="btn btn-lg btn-primary btn-block" type="submit" onclick="setCookie()">Sign in</button>
+        <button formaction="${url_login}" class="btn btn-lg btn-primary btn-block" type="submit" onclick="setCookie()">log in</button>
 <%--        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>--%>
 
         <p class="mt-5 mb-3 text-muted">&copy; 2020</p>

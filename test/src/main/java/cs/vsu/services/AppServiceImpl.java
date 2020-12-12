@@ -30,6 +30,9 @@ public class AppServiceImpl implements AppService {
     private Dao<BookMark> bookMarkDao;
     private Converter converter;
 
+
+    private Dao<User> simpleUserDao;
+
     @Override
     public boolean isExist(UserDTO user) {
         return userDao.checkUser((User) converter.convert(user));
@@ -69,12 +72,17 @@ public class AppServiceImpl implements AppService {
     }
 
     @Override
-    public Set <BookDTO> getTenBestBooks() {
-        Set<BookDTO> res = new HashSet <>();
+    public List <BookDTO> getTenBestBooks() {
+        List<BookDTO> res = new ArrayList <>();
         bookDao.getTenBestBooks().forEach( a -> res.add((BookDTO) converter.convert(a)));
         res.forEach(o-> o.setPublishingCompany((PublishingCompanyDTO) converter.convert(publishingCompanyDao.findById(o.getBookCompanyId(), PublishingCompany.class))));
         res.forEach(o-> o.setMiddleRating(bookDao.middleRating(o.getBookId())));
         return res;
+    }
+
+    @Override
+    public void addUser(UserDTO userDTO) {
+        simpleUserDao.save((User) converter.convert(userDTO));
     }
 
     public void addGenre(GenreDTO genreDTO){
@@ -205,4 +213,10 @@ public class AppServiceImpl implements AppService {
     public void setUsersRatingDao(Dao <UsersRating> usersRatingDao) {
         this.usersRatingDao = usersRatingDao;
     }
+
+    @Autowired
+    public void setSimpleUserDao(Dao <User> simpleUserDao) {
+        this.simpleUserDao = simpleUserDao;
+    }
+
 }

@@ -25,5 +25,6 @@ public interface AppService {
     void deleteBook(BookDTO bookDTO);
     void updateBook(BookDTO bookDTO);
     void addBookMark(BookMarkDTO bookMarkDTO);
-    Set<BookDTO> getTenBestBooks();
+    List<BookDTO> getTenBestBooks();
+    void addUser(UserDTO userDTO);
 }

@@ -4,7 +4,6 @@ import cs.vsu.models.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.hql.internal.ast.SqlASTFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -78,13 +77,18 @@ public class BookDaoImpl implements BookDao {
                         "Join \"LIBRARY_APP\".library.rating r on r.id = rb.rating\n" +
                         "Where r.rating = 'very good'\n" +
                         "group by b.name, b.id\n" +
-                        "order by count(b.name)");
+                        "order by -count(b.name)\n" +
+                        "fetch first 10 row only");
         List sqlRes = query.getResultList();
         List<Book> res = new ArrayList <>();
+        int count = 0;
         for (Object row : sqlRes) {
             Object[] r = (Object[])row;
             Book b = new Book((Integer)r[0], (String)r[1], (Date)r[2], (String)r[3], (Integer)r[4], new HashSet <>(), new HashSet <>());
             res.add(b);
+            count++;
+            if (count==10)
+                break;
         }
         return res;
     }
