@@ -35,9 +35,26 @@
 <header>
     <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
-            <div class="row">
-                <h1>пока ничего</h1>
-            </div>
+            <ul class="navbar-nav mr-auto" >
+                <li class="nav-item active navbarli">
+                    <c:url value="/tenBest" var="tenBest_url"/>
+                    <form method="post" action="${tenBest_url}">
+                        <input type="hidden" name="login" value="${login}">
+                        <input type="hidden" name="password" value="${password}">
+                        <button class="btn btn-lg btn-block" type="submit">ten best</button>
+                    </form>
+                    <span class="sr-only">(current)</span>
+                </li>
+                <li class="nav-item active navbarli">
+                    <c:url value="/books" var="books_url"/>
+                    <form method="post" action="${books_url}">
+                        <input type="hidden" name="login" value="${login}">
+                        <input type="hidden" name="password" value="${password}">
+                        <button class="btn btn-lg btn-block" type="submit">all books</button>
+                    </form>
+                    <span class="sr-only">(current)</span>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
@@ -61,8 +78,12 @@
                     <p class="card-text">
                         publishingCompany: ${book.publishingCompany.name}<br>
                         releaseDate: ${book.bookReleaseDate}<br>
+                        <c:if test="${book.authors.size()}>0">
                         authors: <c:forEach items="${book.authors}" var="author"><c:out value="${author.authorName}"/>,</c:forEach><br>
+                        </c:if>
+                        <c:if test="${book.authors.size()}>0">
                         genres: <c:forEach items="${book.genres}" var="genre"><c:out value="${genre.name}"/>,</c:forEach><br>
+                        </c:if>
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">

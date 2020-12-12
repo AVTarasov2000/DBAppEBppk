@@ -3,6 +3,7 @@ package cs.vsu.services;
 import cs.vsu.dto.*;
 
 import java.util.List;
+import java.util.Set;
 
 public interface AppService {
     List <AuthorDTO> getAllAuthors();
@@ -24,4 +25,5 @@ public interface AppService {
     void deleteBook(BookDTO bookDTO);
     void updateBook(BookDTO bookDTO);
     void addBookMark(BookMarkDTO bookMarkDTO);
+    Set<BookDTO> getTenBestBooks();
 }

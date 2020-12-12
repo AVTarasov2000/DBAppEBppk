@@ -36,7 +36,55 @@
     <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
             <div class="row">
-                <h1>пока ничего</h1>
+                <c:url value="/addBook" var="updateUrl"/>
+                <form action="${updateUrl}" method="post" class="form-inline">
+                    <input type="hidden" name="login" value="${login}">
+                    <input type="hidden" name="password" value="${password}">
+
+                    <label for="bookName" class="sr-only">name</label>
+                    <input type="text" name="bookName" id="bookName" class="form-group mb-2 form-control" height="30px">
+
+                    <div class="form-group">
+                        <label for="bookReleaseDateFrom" class="sr-only">release date</label>
+                        <input type="date" name="bookReleaseDateFrom" id="bookReleaseDateFrom" class=" mb-2" height="30px" width="50px">
+
+                        <label for="bookReleaseDateTo" class="sr-only">release date</label>
+                        <input type="date" name="bookReleaseDateTo" id="bookReleaseDateTo" class=" mb-2" height="30px" width="50px">
+                    </div>
+                    <label for="bookLinkToFile" class="sr-only">link</label>
+                    <input type="text" name="bookLinkToFile" id="bookLinkToFile" class="form-group mb-2 form-control" height="30px">
+
+                    <label for="bookCompanyId" class="sr-only">company</label>
+                    <%--                    <input type="text" name="bookCompanyId" id="bookCompanyId" class="form-group mb-2 form-control" height="30px">--%>
+                    <select class="form-group form-control" name="company" id="bookCompanyId">
+                        <option value=""></option>
+                        <c:forEach items="${companys}" var="company">
+                            <option value="${company.id}:${company.name}"><c:out value="${company.name}"/></option>
+                        </c:forEach>
+                    </select>
+
+                    <input type="hidden" value="" name="author" id="author">
+                    <label for="author"></label>
+                    <select class="form-group form-control" id="authorss" multiple  onclick="$('#author').val($('#authorss').val())">
+                        <option value=""></option>
+                        <c:forEach items="${authors}" var="author">
+                            <option value="${author.authorId}:${author.authorName}"><c:out value="${author.authorName}"/></option>
+                        </c:forEach>
+                    </select>
+
+                    <input type="hidden" value="" name="genre" id="genre">
+                    <label for="genreId"></label>
+                    <select class="form-group form-control" name="genress" multiple id="genreId" onclick="$('#genre').val($('#genreId').val())">
+                        <option value=""></option>
+                        <c:forEach items="${genres}" var="genre">
+                            <option value="${genre.id}:${genre.name}"><c:out value="${genre.name}"/></option>
+                        </c:forEach>
+                    </select>
+
+                    <%--                    <label for="newBook" class="sr-only">author</label>--%>
+                    <%--                    <input type="text" name="name" id="newBook" class="form-group mb-2 form-control" height="30px">--%>
+                    <button class="btn btn-primary mb-2" type="submit">add</button>
+                </form>
             </div>
         </div>
     </div>

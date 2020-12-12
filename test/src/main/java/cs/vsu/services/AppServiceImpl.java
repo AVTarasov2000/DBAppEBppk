@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -67,6 +68,14 @@ public class AppServiceImpl implements AppService {
         bookMarkDao.save((BookMark) converter.convert(bookMarkDTO));
     }
 
+    @Override
+    public Set <BookDTO> getTenBestBooks() {
+        Set<BookDTO> res = new HashSet <>();
+        bookDao.getTenBestBooks().forEach( a -> res.add((BookDTO) converter.convert(a)));
+        res.forEach(o-> o.setPublishingCompany((PublishingCompanyDTO) converter.convert(publishingCompanyDao.findById(o.getBookCompanyId(), PublishingCompany.class))));
+        res.forEach(o-> o.setMiddleRating(bookDao.middleRating(o.getBookId())));
+        return res;
+    }
 
     public void addGenre(GenreDTO genreDTO){
         genreDao.save((Genre) converter.convert(genreDTO));

@@ -27,7 +27,13 @@ public class AppController {
 
     @RequestMapping(value = "/signin", method = {RequestMethod.POST})
     public ModelAndView signInCheck(@ModelAttribute("user") UserDTO userDTO) {
-        return toMain(userDTO);
+        return toMain(userDTO, null);
+    }
+
+    @RequestMapping(value = "/tenBest", method = {RequestMethod.POST})
+    public ModelAndView mainWithTenBest(@ModelAttribute("user") UserDTO userDTO) {
+        Set<BookDTO> tenBestBooks = service.getTenBestBooks();
+        return toMain(userDTO, tenBestBooks);
     }
 
 
@@ -41,11 +47,15 @@ public class AppController {
     }
 
 
-    private ModelAndView toMain(UserDTO userDTO){
+    private ModelAndView toMain(UserDTO userDTO, Set<BookDTO> viewBooks){
         UserDTO user = service.getUser(userDTO);
         ModelAndView modelAndView = new ModelAndView();
         if(user != null) {
-            Set <BookDTO> books = user.getBooks();
+            Set <BookDTO> books;
+            if(viewBooks==null)
+                books = user.getBooks();
+            else
+                books=viewBooks;
 
             modelAndView.setViewName("main");
             setNavBarFields(modelAndView, user);
