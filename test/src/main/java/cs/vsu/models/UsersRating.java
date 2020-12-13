@@ -25,7 +25,7 @@ public class UsersRating {
     private Integer userId;
     @Column(name = "rating")
     @Getter @Setter
-    private Integer page;
+    private Integer ratingId;
     @ManyToOne
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
     @Getter @Setter @One

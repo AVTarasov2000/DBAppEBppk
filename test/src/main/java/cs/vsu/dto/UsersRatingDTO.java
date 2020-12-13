@@ -20,7 +20,7 @@ public class UsersRatingDTO {
     @Getter @Setter
     private Integer userId;
     @Getter @Setter
-    private Integer page;
+    private Integer ratingId;
     @Getter @Setter @One
     private BookDTO books;
     @Getter @Setter @One
