@@ -1,8 +1,6 @@
 package cs.vsu.services;
 
-import cs.vsu.dao.BookDao;
-import cs.vsu.dao.Dao;
-import cs.vsu.dao.UserDao;
+import cs.vsu.dao.*;
 import cs.vsu.dto.*;
 import cs.vsu.models.*;
 import cs.vsu.utils.Converter;
@@ -10,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class AppServiceImpl implements AppService {
@@ -26,8 +22,10 @@ public class AppServiceImpl implements AppService {
     private Dao<Rating> ratingDao;
     private UserDao userDao;
     private BookDao bookDao;
-    private Dao<UsersRating> usersRatingDao;
-    private Dao<BookMark> bookMarkDao;
+    private Dao<UsersRating> simpleUsersRatingDao;
+    private Dao<BookMark> simpleBookMarkDao;
+    private BookMarkDao bookMarkDao;
+    private UsersRatingDao usersRatingDao;
     private Converter converter;
 
 
@@ -68,7 +66,24 @@ public class AppServiceImpl implements AppService {
 
 
     public void addBookMark(BookMarkDTO bookMarkDTO){
-        bookMarkDao.save((BookMark) converter.convert(bookMarkDTO));
+        simpleBookMarkDao.save((BookMark) converter.convert(bookMarkDTO));
+    }
+
+    @Override
+    public void deleteBookMark(BookMarkDTO bookMarkDTO) {
+        bookMarkDao.removeNotById((BookMark)converter.convert(bookMarkDTO));
+    }
+
+    @Override
+    public void addUsersRating(UsersRatingDTO usersRatingDTO) {
+        usersRatingDao.addUsersRating((UsersRating)converter.convert(usersRatingDTO));
+    }
+
+    @Override
+    public List <RatingDTO> getAllRatings() {
+        List<RatingDTO> res = new ArrayList <>();
+        ratingDao.getAll(Rating.class).forEach(a->res.add((RatingDTO) converter.convert(a)));
+        return res;
     }
 
     @Override
@@ -180,8 +195,8 @@ public class AppServiceImpl implements AppService {
 //    }
 
     @Autowired
-    public void setBookMarkDao(Dao <BookMark> bookMarkDao) {
-        this.bookMarkDao = bookMarkDao;
+    public void setSimpleBookMarkDao(Dao <BookMark> simpleBookMarkDao) {
+        this.simpleBookMarkDao = simpleBookMarkDao;
     }
 
     @Autowired
@@ -210,8 +225,8 @@ public class AppServiceImpl implements AppService {
     }
 
     @Autowired
-    public void setUsersRatingDao(Dao <UsersRating> usersRatingDao) {
-        this.usersRatingDao = usersRatingDao;
+    public void setSimpleUsersRatingDao(Dao <UsersRating> simpleUsersRatingDao) {
+        this.simpleUsersRatingDao = simpleUsersRatingDao;
     }
 
     @Autowired
@@ -219,4 +234,13 @@ public class AppServiceImpl implements AppService {
         this.simpleUserDao = simpleUserDao;
     }
 
+    @Autowired
+    public void setBookMarkDao(BookMarkDao bookMarkDao) {
+        this.bookMarkDao = bookMarkDao;
+    }
+
+    @Autowired
+    public void setUsersRatingDao(UsersRatingDao usersRatingDao) {
+        this.usersRatingDao = usersRatingDao;
+    }
 }

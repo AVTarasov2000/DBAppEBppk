@@ -1,6 +1,7 @@
 package cs.vsu.services;
 
 import cs.vsu.dto.*;
+import cs.vsu.models.BookMark;
 
 import java.util.List;
 import java.util.Set;
@@ -27,4 +28,7 @@ public interface AppService {
     void addBookMark(BookMarkDTO bookMarkDTO);
     List<BookDTO> getTenBestBooks();
     void addUser(UserDTO userDTO);
+    void deleteBookMark(BookMarkDTO bookMarkDTO);
+    void addUsersRating(UsersRatingDTO usersRatingDTO);
+    List<RatingDTO> getAllRatings();
 }

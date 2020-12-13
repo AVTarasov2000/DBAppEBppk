@@ -1,18 +1,20 @@
 package cs.vsu.controller;
 
+import cs.vsu.dao.BookMarkDao;
 import cs.vsu.dto.*;
 import cs.vsu.services.AppService;
+import lombok.SneakyThrows;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class AppController {
@@ -44,6 +46,18 @@ public class AppController {
         return toMain(userDTO, null);
     }
 
+    @RequestMapping(value = "/delBook", method = {RequestMethod.POST})
+    public ModelAndView delMyBook(
+            @ModelAttribute("user") UserDTO userDTO,
+            @ModelAttribute("bookMark")BookMarkDTO bookMarkDTO
+            ) {
+        UserDTO user = service.getUser(userDTO);
+        if (user!=null) {
+            bookMarkDTO.setUserId(user.getId());
+            service.deleteBookMark(bookMarkDTO);
+        }
+        return toMain(userDTO, null);
+    }
 
 
     public ModelAndView toAuthors(UserDTO user){
@@ -65,10 +79,12 @@ public class AppController {
                 books = new ArrayList <>(user.getBooks());
             else
                 books=viewBooks;
+            List<RatingDTO> ratings = service.getAllRatings();
 
             modelAndView.setViewName("main");
             setNavBarFields(modelAndView, user);
             modelAndView.addObject("books", books);
+            modelAndView.addObject("ratings", ratings);
 
             return modelAndView;
         } else {
@@ -90,6 +106,23 @@ public class AppController {
     }
 
 
+    @SneakyThrows
+    @RequestMapping(value = "/addBookRating", method = {RequestMethod.POST})
+    public ModelAndView addBookRating(
+            @ModelAttribute("user") UserDTO userDTO,
+            @ModelAttribute("usersRating") UsersRatingDTO usersRatingDTO
+    ) {
+
+
+        UserDTO user = service.getUser(userDTO);
+        if(user == null){
+            return toMain(userDTO, null);
+        }
+
+        usersRatingDTO.setUserId(user.getId());
+        service.addUsersRating(usersRatingDTO);
+        return toMain(userDTO, null);
+    }
     //setters---------------------------------------------------------------------
     @Autowired
     public void setService(AppService service) {

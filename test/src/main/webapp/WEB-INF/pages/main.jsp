@@ -78,17 +78,31 @@
                     <p class="card-text">
                         publishingCompany: ${book.publishingCompany.name}<br>
                         releaseDate: ${book.bookReleaseDate}<br>
-                        <c:if test="${book.authors.size()}>0">
                         authors: <c:forEach items="${book.authors}" var="author"><c:out value="${author.authorName}"/>,</c:forEach><br>
-                        </c:if>
-                        <c:if test="${book.authors.size()}>0">
                         genres: <c:forEach items="${book.genres}" var="genre"><c:out value="${genre.name}"/>,</c:forEach><br>
-                        </c:if>
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
+                            <c:url value="/delBook" var="delBookMark_url"/>
+                            <form id="dellBook_${book.bookId}" method="post" action="${delBookMark_url}">
+                                <input type="hidden" name="bookId" value="${book.bookId}">
+                                <input type="hidden" name="login" value="${login}">
+                                <input type="hidden" name="password" value="${password}">
+                            </form>
                             <button type="button" class="btn btn-sm btn-outline-secondary">Read</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Mark</button>
+                            <button form="dellBook_${book.bookId}" class="btn btn-sm btn-outline-secondary" type="submit">delete</button>
+                            <c:url value="/addBookRating" var="addBookRating_url"/>
+                            <form action="${addBookRating_url}" method="post">
+                                <input type="hidden" name="bookId" value="${book.bookId}">
+                                <input type="hidden" name="login" value="${login}">
+                                <input type="hidden" name="password" value="${password}">
+                                <select class="form-group form-control" name="ratingId" id="genreId">
+                                    <c:forEach items="${ratings}" var="rating">
+                                        <option value="${rating.id}"><c:out value="${rating.name}"/></option>
+                                    </c:forEach>
+                                </select>
+                                <input type="submit" class="btn btn-primary mb-2">
+                            </form>
                         </div>
                         <small class="text-muted">${book.middleRating}</small>
                     </div>
@@ -131,6 +145,19 @@
         </p>
     </div>
 </footer>
+<script>
+    function sendAjax(bookId, rating){
+        data = {"login":'${login}',"password":'${password}', "bookId":bookId,  "rating":rating};
+        $.ajax({
+            type:'POST',
+            url:"addBookRating",
+            contentType: "application/json;",
+            dataType:'json',
+            data: JSON.stringify(data)
+            <%--data: bookId+"|${user.id}|0",--%>
+        })
+    }
+</script>
 <script src="<c:url value="/resources/jquery-3.5.1.min.js"/>" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="<c:url value="/resources/jquery-3.5.1.min.js"/>"><\/script>')</script><script src="<c:url value="/resources/bootstrap-4.0.0-dist/js/bootstrap.bundle.min.js"/>"></script>
 </body>
