@@ -1,5 +1,7 @@
 package cs.vsu.dao;
 
+import cs.vsu.dto.BookDTO;
+import cs.vsu.dto.MultipleBookSelectDTO;
 import cs.vsu.models.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,6 +14,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -85,12 +88,105 @@ public class BookDaoImpl implements BookDao {
         for (Object row : sqlRes) {
             Object[] r = (Object[])row;
             Book b = new Book((Integer)r[0], (String)r[1], (Date)r[2], (String)r[3], (Integer)r[4], new HashSet <>(), new HashSet <>());
+            b.setGenres(getBooksGenres(b));
+            b.setAuthors(getBooksAuthors(b));
             res.add(b);
             count++;
             if (count==10)
                 break;
         }
+
         return res;
     }
 
+    @Override
+    public List <Book> getBySelector(MultipleBookSelectDTO selectDTO) {
+        Session session = sessionFactory.openSession();
+        String authorJoins = "";
+        String authorWheres = "";
+        String authorTemp = "ba";
+        for (Integer id:
+             selectDTO.getAuthorIds()) {
+            authorJoins += " JOIN \"LIBRARY_APP\".library.book_author "+authorTemp+" on b.id = "+authorTemp+".book_id \n";
+            authorWheres += " And "+authorTemp+".author_id="+id.toString()+"\n";
+            authorTemp += authorTemp;
+        }
+
+        String genreJoins = "";
+        String genreWheres = "";
+        String genreTemp = "bg";
+        for (Integer id:
+                selectDTO.getGenreIds()) {
+            genreJoins += " JOIN \"LIBRARY_APP\".library.book_genre "+genreTemp+" on b.id = "+genreTemp+".book_id \n";
+            genreWheres += " And "+genreTemp+".genre_id="+id.toString()+"\n";
+            genreTemp += genreTemp;
+        }
+        
+        Query query = session.createSQLQuery(
+                "SELECT b.id, b.name, b.release_date, b.link_to_file, b.company_id from \"LIBRARY_APP\".library.book b\n" +
+                        authorJoins+
+                        genreJoins+
+                        "WHERE b.name=:sName" +
+                        " And b.release_date BETWEEN :sDateFrom And :sDateTo " +
+                        "And b.company_id = :sCompany " +
+                        authorWheres+
+                        genreWheres
+                        );
+        query.setParameter("sName", selectDTO.getBookName());
+        query.setParameter("sDateFrom", selectDTO.getBookReleaseDateFrom());
+        query.setParameter("sDateTo", selectDTO.getBookReleaseDateTo());
+        query.setParameter("sCompany", selectDTO.getBookCompanyId());
+
+        List sqlRes = query.getResultList();
+        List<Book> res = new ArrayList <>();
+        int count = 0;
+        for (Object row : sqlRes) {
+            Object[] r = (Object[])row;
+            Book b = new Book((Integer)r[0], (String)r[1], (Date)r[2], (String)r[3], (Integer)r[4], new HashSet <>(), new HashSet <>());
+            b.setGenres(getBooksGenres(b));
+            b.setAuthors(getBooksAuthors(b));
+            res.add(b);
+            count++;
+            if (count==10)
+                break;
+        }
+
+        return res;
+    }
+
+    public Set <Author> getBooksAuthors(Book book){
+        Session session = sessionFactory.openSession();
+        Query query = session.createSQLQuery(
+                "SELECT a.id, a.name from \"LIBRARY_APP\".library.author a\n" +
+                        "join \"LIBRARY_APP\".library.book_author ba on a.id=ba.author_id\n" +
+                        "Where ba.book_id = :bookId\n"
+        );
+        query.setParameter("bookId", book.getBookId());
+        List sqlRes = query.getResultList();
+        Set<Author> res = new HashSet <>();
+        for (Object o :
+                sqlRes) {
+            Object[] row = (Object[]) o;
+            res.add(new Author((Integer) row[0], (String) row[1], new HashSet <>()));
+        }
+        return res;
+    }
+
+    public Set <Genre> getBooksGenres(Book book){
+        Session session = sessionFactory.openSession();
+        Query query = session.createSQLQuery(
+                "SELECT g.id, g.name from \"LIBRARY_APP\".library.genre g\n" +
+                        "join \"LIBRARY_APP\".library.book_genre bg on g.id=bg.genre_id\n" +
+                        "Where bg.book_id = :bookId\n"
+        );
+        query.setParameter("bookId", book.getBookId());
+        List sqlRes = query.getResultList();
+        Set<Genre> res = new HashSet <>();
+        for (Object o :
+                sqlRes) {
+            Object[] row = (Object[]) o;
+            res.add(new Genre((Integer) row[0], (String) row[1], new HashSet <>()));
+        }
+        return res;
+    }
 }

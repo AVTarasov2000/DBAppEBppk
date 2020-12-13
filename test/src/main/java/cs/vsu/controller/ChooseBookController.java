@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -37,8 +38,46 @@ public class ChooseBookController {
         return toChoosingPage(user);
     }
 
+    @RequestMapping(value = "/selectBooks", method = {RequestMethod.POST})
+    public ModelAndView selectBooks(
+            @ModelAttribute("user") UserDTO userDTO,
+            @ModelAttribute("selector") MultipleBookSelectDTO selectDTO,
+            @ModelAttribute("company") String companyStr,
+            @ModelAttribute("author") String authorStr,
+            @ModelAttribute("genre") String genreStr
+    ) {
+        UserDTO user = service.getUser(userDTO);
+        if(user == null){
+            return appController.signIn();
+        }
+        if(!authorStr.equals("")) {
+            String[] authors = authorStr.split(",");
+            for (String auth : authors) {
+                String[] author = auth.split(":");
+                selectDTO.getAuthorIds().add(Integer.parseInt(author[0]));
+            }
+        }
+        if(!genreStr.equals("")) {
+            String[] genres = genreStr.split(",");
+            for (String gen : genres) {
+                String[] genre = gen.split(":");
+                selectDTO.getGenreIds().add(Integer.parseInt(genre[0]));
+            }
+        }
+        if(!companyStr.equals("")) {
+            String[] company = companyStr.split(":");
+            selectDTO.setBookCompanyId(Integer.parseInt(company[0]));
+        }
+        List<BookDTO> selectedBooks = service.getBySelector(selectDTO);
+        return toChoosingPage(user, selectedBooks);
+    }
+
     @RequestMapping(value = "/tenBest", method = {RequestMethod.POST})
     public ModelAndView mainWithTenBest(@ModelAttribute("user") UserDTO userDTO) {
+        UserDTO user = service.getUser(userDTO);
+        if(user == null){
+            return appController.signIn();
+        }
         List<BookDTO> tenBestBooks = service.getTenBestBooks();
         return toChoosingPage(userDTO, tenBestBooks);
     }

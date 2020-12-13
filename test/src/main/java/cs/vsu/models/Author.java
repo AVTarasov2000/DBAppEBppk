@@ -4,7 +4,9 @@ package cs.vsu.models;
 import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.Many;
 import cs.vsu.dto.AuthorDTO;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -14,6 +16,8 @@ import java.util.Set;
 @Entity
 @Table(name="library.author", schema = "library")
 @DTODAO(targetClass = AuthorDTO.class)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Author {
 
     @Id

@@ -1,6 +1,7 @@
 package cs.vsu.dao;
 
 import cs.vsu.dto.BookDTO;
+import cs.vsu.dto.MultipleBookSelectDTO;
 import cs.vsu.models.Author;
 import cs.vsu.models.Book;
 
@@ -11,4 +12,5 @@ public interface BookDao {
     void addBook(Book book);
     String middleRating(Integer bookId);
     List <Book> getTenBestBooks();
+    List<Book> getBySelector(MultipleBookSelectDTO selectDTO);
 }

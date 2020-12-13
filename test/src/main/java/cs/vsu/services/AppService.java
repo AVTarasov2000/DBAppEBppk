@@ -31,4 +31,5 @@ public interface AppService {
     void deleteBookMark(BookMarkDTO bookMarkDTO);
     void addUsersRating(UsersRatingDTO usersRatingDTO);
     List<RatingDTO> getAllRatings();
+    List<BookDTO> getBySelector(MultipleBookSelectDTO selectDTO);
 }

@@ -81,6 +81,17 @@
                         authors: <c:forEach items="${book.authors}" var="author"><c:out value="${author.authorName}"/>,</c:forEach><br>
                         genres: <c:forEach items="${book.genres}" var="genre"><c:out value="${genre.name}"/>,</c:forEach><br>
                     </p>
+                    <form action="${addBookRating_url}" method="post">
+                        <input type="hidden" name="bookId" value="${book.bookId}">
+                        <input type="hidden" name="login" value="${login}">
+                        <input type="hidden" name="password" value="${password}">
+                        <select class="form-group form-control" name="ratingId" id="genreId">
+                            <c:forEach items="${ratings}" var="rating">
+                                <option value="${rating.id}"><c:out value="${rating.name}"/></option>
+                            </c:forEach>
+                        </select>
+                        <input type="submit" class="btn btn-primary mb-2">
+                    </form>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <c:url value="/delBook" var="delBookMark_url"/>
@@ -92,17 +103,6 @@
                             <button type="button" class="btn btn-sm btn-outline-secondary">Read</button>
                             <button form="dellBook_${book.bookId}" class="btn btn-sm btn-outline-secondary" type="submit">delete</button>
                             <c:url value="/addBookRating" var="addBookRating_url"/>
-                            <form action="${addBookRating_url}" method="post">
-                                <input type="hidden" name="bookId" value="${book.bookId}">
-                                <input type="hidden" name="login" value="${login}">
-                                <input type="hidden" name="password" value="${password}">
-                                <select class="form-group form-control" name="ratingId" id="genreId">
-                                    <c:forEach items="${ratings}" var="rating">
-                                        <option value="${rating.id}"><c:out value="${rating.name}"/></option>
-                                    </c:forEach>
-                                </select>
-                                <input type="submit" class="btn btn-primary mb-2">
-                            </form>
                         </div>
                         <small class="text-muted">${book.middleRating}</small>
                     </div>
@@ -111,30 +111,6 @@
         </div>
     </c:forEach>
     </div>
-<%--    <table class="table table-inverse">--%>
-<%--        <thead class="thead-default">--%>
-<%--        <tr>--%>
-<%--            <th>Book Name</th>--%>
-<%--            <th>Publishing Company</th>--%>
-<%--            <th>Release Date</th>--%>
-<%--            <th>link to file</th>--%>
-<%--            <th>authors</th>--%>
-<%--            <th>genres</th>--%>
-<%--        </tr>--%>
-<%--        </thead>--%>
-<%--        <tbody>--%>
-<%--        <c:forEach items="${books}" var="book">--%>
-<%--            <tr>--%>
-<%--                <td><c:out value="${book.bookName}"/></td>--%>
-<%--                <td><c:out value="${book.publishingCompany.name}"/></td>--%>
-<%--                <td><c:out value="${book.bookReleaseDate}"/></td>--%>
-<%--                <td><c:out value="${book.bookLinkToFile}"/></td>--%>
-<%--                <td><c:forEach items="${book.authors}" var="author">|<c:out value="${author.authorName}"/>|</c:forEach> </td>--%>
-<%--                <td><c:forEach items="${book.genres}" var="genre">|<c:out value="${genre.name}"/>|</c:forEach> </td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-<%--        </tbody>--%>
-<%--    </table>--%>
 
 </main>
 

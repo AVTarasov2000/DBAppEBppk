@@ -140,6 +140,14 @@ public class AppServiceImpl implements AppService {
         }
     }
 
+
+    @Override
+    public List <BookDTO> getBySelector(MultipleBookSelectDTO selectDTO) {
+        List<BookDTO> res = new ArrayList <>();
+        bookDao.getBySelector(selectDTO).forEach( a -> res.add((BookDTO) converter.convert(a)));
+        return res;
+    }
+
     @Override
     public List <AuthorDTO> getAllAuthors() {
         List<AuthorDTO> res = new ArrayList <>();

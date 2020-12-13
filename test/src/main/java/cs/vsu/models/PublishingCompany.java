@@ -3,7 +3,9 @@ package cs.vsu.models;
 import cs.vsu.annotations.DTODAO;
 import cs.vsu.annotations.Many;
 import cs.vsu.dto.PublishingCompanyDTO;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,6 +15,8 @@ import java.util.Set;
 @Entity
 @Table(name = "library.publishing_company", schema = "library")
 @DTODAO(targetClass = PublishingCompanyDTO.class)
+@AllArgsConstructor
+@NoArgsConstructor
 public class PublishingCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
