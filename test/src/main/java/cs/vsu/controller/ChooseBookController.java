@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import cs.vsu.dto.*;
+import cs.vsu.models.Book;
 import cs.vsu.services.AppService;
 import lombok.SneakyThrows;
 import org.json.JSONObject;
@@ -36,11 +37,22 @@ public class ChooseBookController {
         return toChoosingPage(user);
     }
 
-    public ModelAndView toChoosingPage(UserDTO user){
+    @RequestMapping(value = "/tenBest", method = {RequestMethod.POST})
+    public ModelAndView mainWithTenBest(@ModelAttribute("user") UserDTO userDTO) {
+        List<BookDTO> tenBestBooks = service.getTenBestBooks();
+        return toChoosingPage(userDTO, tenBestBooks);
+    }
+
+    public ModelAndView toChoosingPage(UserDTO userDTO){
+        List <BookDTO> books = service.getAllBooks();
+        return toChoosingPage(userDTO, books);
+    }
+
+    public ModelAndView toChoosingPage(UserDTO user, List<BookDTO> books){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("chooseBook");
         appController.setNavBarFields(modelAndView, user);
-        List <BookDTO> books = service.getAllBooks();
+//        List <BookDTO> books = service.getAllBooks();
         List <AuthorDTO> authors = service.getAllAuthors();
         List <PublishingCompanyDTO> companys = service.getAllCompanys();
         List<GenreDTO> genres = service.getAllGenres();

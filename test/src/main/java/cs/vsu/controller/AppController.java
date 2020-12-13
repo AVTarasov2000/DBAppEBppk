@@ -44,11 +44,6 @@ public class AppController {
         return toMain(userDTO, null);
     }
 
-    @RequestMapping(value = "/tenBest", method = {RequestMethod.POST})
-    public ModelAndView mainWithTenBest(@ModelAttribute("user") UserDTO userDTO) {
-        List<BookDTO> tenBestBooks = service.getTenBestBooks();
-        return toMain(userDTO, tenBestBooks);
-    }
 
 
     public ModelAndView toAuthors(UserDTO user){
