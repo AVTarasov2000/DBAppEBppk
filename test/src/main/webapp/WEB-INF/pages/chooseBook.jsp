@@ -45,10 +45,10 @@
                     <input type="text" name="bookName" id="bookName" class="form-group mb-2 form-control" height="30px">
 
                     <label for="bookReleaseDateFrom" class="sr-only">release date</label>
-                    <input type="date" name="bookReleaseDateFrom" id="bookReleaseDateFrom" class=" mb-2" height="30px" width="50px">
+                    <input type="date" name="bookReleaseDateFrom" value="0001-01-01" id="bookReleaseDateFrom" class=" mb-2" height="30px" width="50px">
 
                     <label for="bookReleaseDateTo" class="sr-only">release date</label>
-                    <input type="date" name="bookReleaseDateTo" id="bookReleaseDateTo" class=" mb-2" height="30px" width="50px">
+                    <input type="date" name="bookReleaseDateTo" value="3000-01-01" id="bookReleaseDateTo" class=" mb-2" height="30px" width="50px">
 
                     <label for="bookCompanyId" class="sr-only">company</label>
                     <select class="form-group form-control" name="company" id="bookCompanyId">

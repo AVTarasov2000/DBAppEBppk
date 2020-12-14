@@ -121,21 +121,31 @@ public class BookDaoImpl implements BookDao {
             genreWheres += " And "+genreTemp+".genre_id="+id.toString()+"\n";
             genreTemp += genreTemp;
         }
+        String companyCheck = "";
+        if(selectDTO.getBookCompanyId()!=null)
+            companyCheck = "And b.company_id = :sCompany ";
+        String nameCheck = " '1' = '1'";
+        if(!selectDTO.getBookName().equals(""))
+            nameCheck = " b.name=:sName ";
         
         Query query = session.createSQLQuery(
                 "SELECT b.id, b.name, b.release_date, b.link_to_file, b.company_id from \"LIBRARY_APP\".library.book b\n" +
                         authorJoins+
                         genreJoins+
-                        "WHERE b.name=:sName" +
+//                        "WHERE b.name=:sName" +
+                        "WHERE"+ nameCheck +
                         " And b.release_date BETWEEN :sDateFrom And :sDateTo " +
-                        "And b.company_id = :sCompany " +
+//                        "And b.company_id = :sCompany " +
+                        companyCheck+
                         authorWheres+
                         genreWheres
                         );
-        query.setParameter("sName", selectDTO.getBookName());
+        if(!selectDTO.getBookName().equals(""))
+            query.setParameter("sName", selectDTO.getBookName());
         query.setParameter("sDateFrom", selectDTO.getBookReleaseDateFrom());
         query.setParameter("sDateTo", selectDTO.getBookReleaseDateTo());
-        query.setParameter("sCompany", selectDTO.getBookCompanyId());
+        if(selectDTO.getBookCompanyId()!=null)
+            query.setParameter("sCompany", selectDTO.getBookCompanyId());
 
         List sqlRes = query.getResultList();
         List<Book> res = new ArrayList <>();
