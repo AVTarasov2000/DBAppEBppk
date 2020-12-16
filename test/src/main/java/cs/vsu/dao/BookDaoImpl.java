@@ -80,7 +80,7 @@ public class BookDaoImpl implements BookDao {
                         "Join \"LIBRARY_APP\".library.rating r on r.id = rb.rating\n" +
                         "Where r.rating = 'very good'\n" +
                         "group by b.name, b.id\n" +
-                        "order by -count(b.name)\n" +
+                        "order by -count(b.name)/(Select count(*) from \"LIBRARY_APP\".library.read_book rbb where rbb.book_id = b.id)\n" +
                         "fetch first 10 row only");
         List sqlRes = query.getResultList();
         List<Book> res = new ArrayList <>();
